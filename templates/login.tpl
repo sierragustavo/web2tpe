@@ -11,9 +11,8 @@
         <input type="text" placeholder="Enter Password" name='password'>
 
         <input type="submit" value="Log In">
-
-        <a href="register">You dont acount?</a>
     </form>
+    <a href="register">You dont acount?</a>
 </div>
-
+<a>{$mensaje}</a>
 {include 'templates/footer.tpl'}

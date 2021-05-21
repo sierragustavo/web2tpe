@@ -1,15 +1,14 @@
 <?php
 
 require_once('View.php');
-require_once('helpers/AuthHelper.php');
+
 
 class NoticiaView extends View
 {
     public function __construct()
     {
         parent::__construct();
-        $authHelper = new AuthHelper();
-        $username = $authHelper->getLoggedUserName();
+        $username = parent::getUsername();
         $this->getSmarty()->assign('username', $username);
     }
 
