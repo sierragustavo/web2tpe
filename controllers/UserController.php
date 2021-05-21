@@ -38,6 +38,7 @@ class UserController
 
     function logout(){
         AuthHelper::logout();
+        header("Location: " . BASE_URL . 'home');
     }
 
     function register()

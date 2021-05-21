@@ -17,7 +17,7 @@
         <a href="dpsTierList" class="button-menu">DPS TIER LIST</a>
         <a href="contact" class="button-menu">CONTACT US</a>
         {if isset($username) && $username}
-            <span class="innk">{$username}</span>
+            <a class="innk">{$username}</a>
             <a class="button-menu-end" href="logout">Logout</a>
         {else}
             <a href="login" class="button-menu-end"> <div class="login">LOGIN</div></a>
