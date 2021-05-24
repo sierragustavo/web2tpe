@@ -12,9 +12,16 @@ class NoticiaView extends View
         $this->getSmarty()->assign('username', $username);
     }
 
-    function showAllNews($news)
+    function showAllNews($news, $categories)
     {
         $this->getSmarty()->assign('news', $news);
+        $this->getSmarty()->assign('categories',$categories);
         $this->getSmarty()->display('templates/home.tpl'); // muestro el template   
+    }
+
+    function showAllCategories($categories,$mensaje=null){
+        $this->getSmarty()->assign('mensaje',$mensaje);
+        $this->getSmarty()->assign('categories',$categories);
+        $this->getSmarty()->display('templates/manager.tpl');
     }
 }

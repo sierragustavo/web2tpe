@@ -18,6 +18,7 @@
         <a href="contact" class="button-menu">CONTACT US</a>
         {if isset($username) && $username}
             <a class="innk">{$username}</a>
+            <a href="manager_categories" class="button-menu">CATEGORIES</a>
             <a class="button-menu-end" href="logout">Logout</a>
         {else}
             <a href="login" class="button-menu-end"> <div class="login">LOGIN</div></a>

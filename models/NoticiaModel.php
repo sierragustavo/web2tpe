@@ -18,17 +18,29 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function new()
-    {
-        $title = $_POST['title'];
-        $details = $_POST['details'];
-        $author = $_POST['author'];
-
-        $query = $this->getDb()->prepare('INSERT INTO news (title,details,author,seen)VALUES (?,?,?,false)');
-        $query->execute([$title, $details, $author]);
+    function new($title,$details,$categoryID,$author){
+        $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
+        $query->execute([$title, $details,$categoryID, $author]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
+    function newCategory($name){
+        $query = $this->getDb()->prepare('INSERT INTO categories (name)VALUES (?)');
+        $query->execute([$name]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function deleteCategory($id){
+        $query = $this->getDb()->prepare('DELETE FROM categories WHERE id= ?');
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+    function getCategories()
+    {
+        $query = $this->getDb()->prepare('SELECT * FROM categories');
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
     function delete($id)
     {
         $query = $this->getDb()->prepare('DELETE FROM news WHERE id = ?');

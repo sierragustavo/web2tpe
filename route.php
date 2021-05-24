@@ -25,6 +25,15 @@ switch ($urlParts[0]) {
 	case 'login':
 		$UserController->login();
 		break;
+	case 'manager_categories':
+		$NoticiaController->manage();
+		break;
+	case 'newCategory':
+		$NoticiaController->newCategory();
+		break;
+	case 'deleteCategory':
+		$NoticiaController->deleteCategory($urlParts[1]);
+		break;
 	case 'dpsTierList':
 		$Controller->dpsTierList();
 		break;

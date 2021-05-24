@@ -6,8 +6,12 @@
         <input type="text" name="title">
         <label>Details</label>
         <textarea type="text" name="details"></textarea>
-        <label>Author</label>
-        <input type="text" name="author">
+        <label>Categoría</label>
+        <select name="category">
+        {foreach from=$categories item=category}
+        <option value={$category->id}>{$category->name}</option>
+        {/foreach}
+        </select>
         <button type="submit">Enviar</button>
     </form>
 {/if}
@@ -21,6 +25,12 @@
             Autor: {$noticias->author}
             <br>
             Detalles: {$noticias->details}
+            <br>
+            {foreach from=$categories item=catego}
+            {if ({$noticias->category_pk}=={$catego->id})}
+            Categoria: {$catego->name}
+            {/if}
+            {/foreach}
             {if $noticias->seen==0}
                 <p>
                     no leido</p>
