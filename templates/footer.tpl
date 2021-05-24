@@ -4,7 +4,7 @@
             <a href="#"><img class="icon-footer" src="img/instagramlogo.png"></a>
             <a href="#"><img class="icon-footer" src="img/discordlogo.png"></a>
         </div>
-        <h4>THE INNKEEPER (2020)</h4>
+        <h4>THE INNKEEPER (2021)</h4>
     </footer>
 
 </body>

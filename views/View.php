@@ -10,7 +10,7 @@ class View
     {
         $this->smarty = new Smarty();
         $this->smarty->assign('base_url', BASE_URL);
-        $this->authhelper= new AuthHelper();
+        $this->authhelper = new AuthHelper();
         $username = $this->authhelper->getLoggedUserName();
         $this->getSmarty()->assign('username', $username);
     }
@@ -20,7 +20,8 @@ class View
         return $this->smarty;
     }
 
-    public function getUsername(){
+    public function getUsername()
+    {
         $username = $this->authhelper->getLoggedUserName();
         return $username;
     }

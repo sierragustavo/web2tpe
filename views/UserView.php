@@ -8,7 +8,7 @@ class UserView extends View
     public function __construct()
     {
         parent::__construct();
-        $username =parent::getUsername();
+        $username = parent::getUsername();
         $this->getSmarty()->assign('username', $username);
     }
 

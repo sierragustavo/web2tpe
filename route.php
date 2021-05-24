@@ -14,7 +14,6 @@ $urlParts = explode('/', $_GET['action']);
 $Controller = new Controller();
 $UserController = new UserController();
 $NoticiaController = new NoticiaController();
-$NoticiaModel = new NoticiaModel();
 
 switch ($urlParts[0]) {
 	case 'home':
@@ -39,15 +38,13 @@ switch ($urlParts[0]) {
 		$UserController->registrarUsuario();
 		break;
 	case 'delete':
-		$NoticiaController->delete($urlParts[1]);
+		$NoticiaController->deleteNews($urlParts[1]);
 		break;
 	case 'new':
-		$NoticiaModel->new(); //PREGUNTAR POR ESTO
-		$NoticiaController->showNews();
+		$NoticiaController->addNews();
 		break;
 	case 'seen':
 		$NoticiaController->marcar($urlParts[1]);
-		$NoticiaController->showNews();
 		break;
 	case 'logout':
 		$UserController->logout();

@@ -10,11 +10,6 @@ class Controller
     {
         $this->view = new View();
     }
-
-    function home()
-    {
-        $this->view->renderHome();
-    }
     function contact()
     {
         $this->view->renderContact();
