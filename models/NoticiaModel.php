@@ -18,23 +18,27 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function new($title,$details,$categoryID,$author){
+    function new($title, $details, $categoryID, $author)
+    {
         $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
-        $query->execute([$title, $details,$categoryID, $author]);
+        $query->execute([$title, $details, $categoryID, $author]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function newCategory($name){
+    function newCategory($name)
+    {
         $query = $this->getDb()->prepare('INSERT INTO categories (name)VALUES (?)');
         $query->execute([$name]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function deleteCategory($id){
+    function deleteCategory($id)
+    {
         $query = $this->getDb()->prepare('DELETE FROM categories WHERE id= ?');
         $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_OBJ);
+        return $query->fetch(PDO::PARAM_BOOL); //ACA QUIERO SABER COMO DEVOLVER ALGO SI FUNCIONO O NO LA QUERY
     }
+
     function getCategories()
     {
         $query = $this->getDb()->prepare('SELECT * FROM categories');

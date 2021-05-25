@@ -20,26 +20,7 @@ class NoticiaController
         $this->view->showAllNews($news, $categories);
     }
 
-    public function newCategory()
-    {
-        $name = $_POST['name'];
-        $this->model->newCategory($name);
-        header("Location:" . BASE_URL . 'manager_categories');
-    }
-
-    public function deleteCategory($id)
-    {
-        AuthHelper::checkLoggedIn();
-        if (!$this->model->deleteCategory($id)) {
-            header("Location:" . BASE_URL . 'manager_categories');
-        } else {
-            $categories = $this->model->getCategories();
-            $this->view->showAllCategories($categories, "Password o usuario incorrecto");
-            die();
-        }
-    }
-
-    public function manage()
+     public function showManage()
     {
         $categories = $this->model->getCategories();
         $this->view->showAllCategories($categories);
@@ -60,12 +41,21 @@ class NoticiaController
         $this->model->delete($id);
         header("Location: ../home");
     }
+
     public function addCategory()
     {
         $name = $_POST['name'];
         $this->model->newCategory($name);
         header("Location:" . BASE_URL . 'manager_categories');
     }
+
+    public function deleteCategory($id)
+    {
+        AuthHelper::checkLoggedIn();
+        $this->model->deleteCategory($id);
+        header("Location:" . BASE_URL . 'manager_categories');
+    }
+
     public function marcar($id)
     {
         $this->model->markSeen($id);

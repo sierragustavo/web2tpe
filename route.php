@@ -26,10 +26,10 @@ switch ($urlParts[0]) {
 		$UserController->login();
 		break;
 	case 'manager_categories':
-		$NoticiaController->manage();
+		$NoticiaController->showManage();
 		break;
 	case 'newCategory':
-		$NoticiaController->newCategory();
+		$NoticiaController->addCategory();
 		break;
 	case 'deleteCategory':
 		$NoticiaController->deleteCategory($urlParts[1]);
