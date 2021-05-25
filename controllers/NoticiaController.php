@@ -28,10 +28,11 @@ class NoticiaController
 
     public function addNews() //FORM ADD NOTICIA
     {
+        AuthHelper::checkLoggedIn();
         $title = $_POST['title'];
         $details = $_POST['details'];
-        $author = AuthHelper::getLoggedUserName();
         $categoryID = $_POST['category'];
+        $author = AuthHelper::getLoggedUserName();
         $this->model->new($title, $details, $categoryID, $author);
         $this->view->renderHome();
     }
@@ -44,6 +45,7 @@ class NoticiaController
 
     public function addCategory() //ADD
     {
+        AuthHelper::checkLoggedIn();
         $name = $_POST['name'];
         $this->model->newCategory($name);
         header("Location:" . BASE_URL . 'manager_categories');
