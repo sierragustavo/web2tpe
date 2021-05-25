@@ -26,7 +26,7 @@ class NoticiaController
         $this->view->showAllCategories($categories);
     }
 
-    public function addNews() //FORM CATEGORIAS
+    public function addNews() //FORM ADD NOTICIA
     {
         $title = $_POST['title'];
         $details = $_POST['details'];
@@ -35,7 +35,7 @@ class NoticiaController
         $this->model->new($title, $details, $categoryID, $author);
         $this->view->renderHome();
     }
-    public function deleteNews($id)  //DELETE
+    public function deleteNews($id)  //DELETE NEWS
     {
         AuthHelper::checkLoggedIn();
         $this->model->delete($id);
@@ -49,14 +49,14 @@ class NoticiaController
         header("Location:" . BASE_URL . 'manager_categories');
     }
 
-    public function deleteCategory($id)
+    public function deleteCategory($id) //BORRAR CATEGORIA
     {
         AuthHelper::checkLoggedIn();
         $this->model->deleteCategory($id);
         header("Location:" . BASE_URL . 'manager_categories');
     }
 
-    public function marcar($id)
+    public function marcar($id) //ACTUALIZAR CATEGORIA
     {
         $this->model->markSeen($id);
         header("Location: ../home");
