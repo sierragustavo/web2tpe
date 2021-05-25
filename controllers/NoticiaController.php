@@ -20,29 +20,29 @@ class NoticiaController
         $this->view->showAllNews($news, $categories);
     }
 
-     public function showManage()
+    public function showManage() //PAGINA CATEGORIAS
     {
         $categories = $this->model->getCategories();
         $this->view->showAllCategories($categories);
     }
 
-    public function addNews()
+    public function addNews() //FORM CATEGORIAS
     {
         $title = $_POST['title'];
         $details = $_POST['details'];
         $author = AuthHelper::getLoggedUserName();
         $categoryID = $_POST['category'];
         $this->model->new($title, $details, $categoryID, $author);
-        header('Location: ' . BASE_URL . 'home');
+        $this->view->renderHome();
     }
-    public function deleteNews($id)
+    public function deleteNews($id)  //DELETE
     {
         AuthHelper::checkLoggedIn();
         $this->model->delete($id);
-        header("Location: ../home");
+        $this->view->renderHome();
     }
 
-    public function addCategory()
+    public function addCategory() //ADD
     {
         $name = $_POST['name'];
         $this->model->newCategory($name);

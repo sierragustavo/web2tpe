@@ -22,7 +22,7 @@ class UserController
             $userCheck = $this->model->obtenerUserByUsername($username);
             if (!empty($userCheck) && password_verify($password, $userCheck->password)) {
                 AuthHelper::login($userCheck);
-                header('Location: ' . BASE_URL . "home");
+                $this->view->renderHome();
             } else {
                 $this->view->renderLogin("Password o usuario incorrecto");
                 die();
@@ -39,7 +39,7 @@ class UserController
     function logout()
     {
         AuthHelper::logout();
-        header("Location: " . BASE_URL . 'home');
+        $this->view->renderHome();
     }
 
     function register()
