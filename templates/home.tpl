@@ -20,7 +20,7 @@
     {foreach from=$news item=noticias}
         <div class="container">
             <li>
-                Titulo: {$noticias->title}
+                <h2>Titulo: {$noticias->title}</h2>
             </li>
             Autor: {$noticias->author}
             <br>
@@ -39,15 +39,13 @@
                     leido
                 </p>
             {/if}
+            {if (!$noticias->seen)}
+                <small><a href="seen/{$noticias->id}"> Marcar como Vista </a></small>
+            {/if}
             {if isset($username) && $username}
                 <small><a href="delete/{$noticias->id}"> Delete </a></small>
                 <br>
-                {if (!$noticias->seen)}
-                    <small><a href="seen/{$noticias->id}"> Marcar como Vista </a></small>
-                {/if}
             {/if}
-            <br>
-            <br>
         </div>
     {/foreach}
 

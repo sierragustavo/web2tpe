@@ -12,20 +12,15 @@ class UserView extends View
         $this->getSmarty()->assign('username', $username);
     }
 
-    public function renderLoginConParametro($mensaje)
-    {
-        $this->getSmarty()->assign('mensaje', $mensaje);
-        $this->getSmarty()->display('templates/login.tpl');
-    }
-
     public function renderLogin($mensaje = null)
     {
         $this->getSmarty()->assign('mensaje', $mensaje);
         $this->getSmarty()->display('templates/login.tpl');
     }
 
-    public function renderRegister()
+    public function renderRegister($mensaje = null)
     {
+        $this->getSmarty()->assign('mensaje', $mensaje);
         $this->getSmarty()->display('templates/register.tpl');
     }
 }

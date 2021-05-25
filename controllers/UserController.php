@@ -36,7 +36,8 @@ class UserController
         $this->view->renderLogin();
     }
 
-    function logout(){
+    function logout()
+    {
         AuthHelper::logout();
         header("Location: " . BASE_URL . 'home');
     }
@@ -50,8 +51,22 @@ class UserController
     {
         $user = $_POST['username'];
         $pass = $_POST['password'];
+        $pass2 = $_POST['password2'];
         $email = $_POST['email'];
-        $this->model->add($user, $pass, $email);
-        header("Location: " . BASE_URL . 'login');
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->view->renderRegister("Ingrese un mail correctamente");
+            die();
+        }
+        if (!($pass === $pass2)) {
+            $this->view->renderRegister("Las contraseñas ingresadas no son iguales");
+            die();
+        }
+        if ($this->model->isMailInUse($email)) {
+            $this->view->renderRegister("Mail en uso");
+            die();
+        }
+            $this->model->add($user, $pass, $email);
+            $this->view->renderLogin("Mail registrado correctamente");
+        }
     }
 }

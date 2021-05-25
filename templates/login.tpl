@@ -8,7 +8,7 @@
         <input type="text" placeholder="Enter Username" name="username">
 
         <label for="Password">Password</label>
-        <input type="text" placeholder="Enter Password" name='password'>
+        <input type="password" placeholder="Enter Password" name='password'>
 
         <input type="submit" value="Log In">
     </form>

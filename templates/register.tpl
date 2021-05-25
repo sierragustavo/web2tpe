@@ -8,13 +8,14 @@
         <input type="text" placeholder="Enter Username" name="username">
 
         <label>Password</label>
-        <input type="text" placeholder="Enter Password" name="password">
-
+        <input type="password" placeholder="Enter Password" name="password">
+        <label>Re-enter password</label>
+        <input type="password" placeholder="Re-enter Password" name="password2">
         <label>Email</label>
         <input type="text" placeholder="Your E-mail" name="email">
-
         <input type="submit">
     </form>
+    {$mensaje}
 </div>
 
 {include 'templates/footer.tpl'}
