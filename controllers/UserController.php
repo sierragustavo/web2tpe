@@ -65,8 +65,7 @@ class UserController
             $this->view->renderRegister("Mail en uso");
             die();
         }
-            $this->model->add($user, $pass, $email);
-            $this->view->renderLogin("Mail registrado correctamente");
-        }
+        $this->model->add($user, $pass, $email);
+        $this->view->renderLogin("Mail registrado correctamente");
     }
 }
