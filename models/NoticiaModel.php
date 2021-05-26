@@ -36,7 +36,7 @@ class NoticiaModel extends DBModel
     {
         $query = $this->getDb()->prepare('DELETE FROM categories WHERE id= ?');
         $query->execute([$id]);
-        return $query->fetch(PDO::PARAM_BOOL); //ACA QUIERO SABER COMO DEVOLVER ALGO SI FUNCIONO O NO LA QUERY
+        return $query->fetch(PDO::FETCH_OBJ); //ACA QUIERO SABER COMO DEVOLVER ALGO SI FUNCIONO O NO LA QUERY
     }
 
     function getCategories()
