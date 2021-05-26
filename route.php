@@ -49,6 +49,9 @@ switch ($urlParts[0]) {
 	case 'delete':
 		$NoticiaController->deleteNews($urlParts[1]);
 		break;
+	case 'filtrar':
+		$NoticiaController->filtrar();
+		break;
 	case 'new':
 		$NoticiaController->addNews();
 		break;

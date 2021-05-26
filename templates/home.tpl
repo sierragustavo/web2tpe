@@ -8,14 +8,23 @@
         <textarea type="text" name="details"></textarea>
         <label>Categoría</label>
         <select name="category">
-        {foreach from=$categories item=category}
-        <option value={$category->id}>{$category->name}</option>
-        {/foreach}
+            {foreach from=$categories item=category}
+                <option value={$category->id}>{$category->name}</option>
+            {/foreach}
         </select>
         <button type="submit">Enviar</button>
     </form>
 {/if}
 <ul>
+
+    <form action="filtrar" method="POST">
+        <select name="inputFiltrar">
+            {foreach from=$categories item=category}
+                <option value={$category->id}>{$category->name}</option>
+            {/foreach}
+        </select>
+        <button type="submit">FILTRAR</button>
+    </form>
 
     {foreach from=$news item=noticias}
         <div class="container">
@@ -27,9 +36,9 @@
             Detalles: {$noticias->details}
             <br>
             {foreach from=$categories item=catego}
-            {if ({$noticias->category_pk}=={$catego->id})}
-            Categoria: {$catego->name}
-            {/if}
+                {if ({$noticias->category_pk}=={$catego->id})}
+                    Categoria: {$catego->name}
+                {/if}
             {/foreach}
             {if $noticias->seen==0}
                 <p>

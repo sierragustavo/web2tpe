@@ -34,13 +34,20 @@ class NoticiaController
         $categoryID = $_POST['category'];
         $author = AuthHelper::getLoggedUserName();
         $this->model->new($title, $details, $categoryID, $author);
-        $this->view->renderHome();
+        header("Location:" . BASE_URL . 'home');
     }
     public function deleteNews($id)  //DELETE NEWS
     {
         AuthHelper::checkLoggedIn();
         $this->model->delete($id);
-        $this->view->renderHome();
+        header("Location:" . BASE_URL . 'home');
+    }
+
+    public function filtrar(){
+        $id_category = $_POST['inputFiltrar'];
+        $filtrado = $this->model->getNewsByCategory($id_category);
+        $categories = $this->model->getCategories();
+        $this->view->showAllNews($filtrado,$categories);
     }
 
     public function addCategory() //ADD

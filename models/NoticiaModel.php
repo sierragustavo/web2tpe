@@ -45,6 +45,13 @@ class NoticiaModel extends DBModel
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
+
+    function getNewsByCategory($id_news)
+    {
+        $query = $this->getDb()->prepare('SELECT * FROM news WHERE category_pk=?');
+        $query->execute([$id_news]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
     function delete($id)
     {
         $query = $this->getDb()->prepare('DELETE FROM news WHERE id = ?');
