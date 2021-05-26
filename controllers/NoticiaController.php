@@ -61,6 +61,6 @@ class NoticiaController
     public function marcar($id) //ACTUALIZAR CATEGORIA
     {
         $this->model->markSeen($id);
-        header("Location: ../home");
+        header("Location:" . BASE_URL . 'home');
     }
 }

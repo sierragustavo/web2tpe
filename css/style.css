@@ -1,11 +1,11 @@
 @font-face {
-    font-family: ArcaMajora;
-    src: url(arcamajora.otf);
+    font-family: ArcaMajora3-Bold;
+    src: url(../fonts/ArcaMajora3-Bold.otf) format('otf');
 }
 
 body {
     background-color: #f1f1f1;
-    font-family: ArcaMajora;
+    font-family: ArcaMajora3-Bold;
     width: 95%;
     border: 2px transparent black;
     margin: 25px auto;
@@ -66,10 +66,20 @@ body {
     .topnav.responsive {
         position: relative;
     }
+
     .topnav.responsive .icon {
         position: absolute;
         right: 0;
         top: 0;
+    }
+    header{
+        height: 20px;
+    }
+    .logo{
+        visibility: hidden;
+    }
+    .main-header{
+        visibility: hidden;
     }
     .topnav.responsive a {
         float: none;
