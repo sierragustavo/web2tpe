@@ -18,6 +18,7 @@
 <ul>
 
     <form action="filtrar" method="POST">
+        <label>Categoria:</label>
         <select name="inputFiltrar">
             {foreach from=$categories item=category}
                 <option value={$category->id}>{$category->name}</option>
