@@ -52,6 +52,7 @@
             {if (!$noticias->seen)}
                 <small><a href="seen/{$noticias->id}"> Marcar como Vista </a></small>
             {/if}
+            <br>
             {if isset($username) && $username}
                 <small><a href="delete/{$noticias->id}"> Delete </a></small>
                 <br>
