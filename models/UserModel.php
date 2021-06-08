@@ -28,9 +28,6 @@ class UserModel extends DBModel
         return false;
     }
 
-    public function getEmailList()
-    {
-    }
     public function add($user, $pass, $email)
     {
         $passEnc = password_hash($pass, PASSWORD_DEFAULT);
