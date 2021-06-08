@@ -40,7 +40,7 @@
                 {if ({$noticias->category_pk}=={$catego->id})}
                     Categoria: {$catego->name}
                 {/if}
-            {/foreach}
+            {/foreach}  
             {if $noticias->seen==0}
                 <p>
                     no leido</p>
