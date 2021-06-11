@@ -4,12 +4,12 @@
     <form action="new" method="POST">
         <label>Titulo</label>
         <input type="text" name="title">
-        <label>Details</label>
+        <label>Detalles</label>
         <textarea type="text" name="details"></textarea>
         <label>Categoría</label>
         <select name="category">
             {foreach from=$categories item=category}
-                <option value={$category->id}>{$category->name}</option>
+                <option value={$category->id_category}>{$category->name_category}</option>
             {/foreach}
         </select>
         <button type="submit">Enviar</button>
@@ -21,44 +21,33 @@
         <label>Categoria:</label>
         <select name="inputFiltrar">
             {foreach from=$categories item=category}
-                <option value={$category->id}>{$category->name}</option>
+                <option value={$category->id_category}>{$category->name_category}</option>
             {/foreach}
         </select>
         <button type="submit">FILTRAR</button>
     </form>
-
-    {foreach from=$news item=noticias}
-        <div class="container">
-            <li>
-                <h2>Titulo: {$noticias->title}</h2>
-            </li>
-            Autor: {$noticias->author}
-            <br>
-            Detalles: {$noticias->details}
-            <br>
-            {foreach from=$categories item=catego}
-                {if ({$noticias->category_pk}=={$catego->id})}
-                    Categoria: {$catego->name}
-                {/if}
-            {/foreach}  
-            {if $noticias->seen==0}
-                <p>
-                    no leido</p>
-            {else}
-                <p>
-                    leido
-                </p>
-            {/if}
-            {if (!$noticias->seen)}
-                <small><a href="seen/{$noticias->id}"> Marcar como Vista </a></small>
-            {/if}
-            <br>
-            {if isset($username) && $username}
-                <small><a href="delete/{$noticias->id}"> Delete </a></small>
+    <div class="noticia-container">
+        {foreach from=$news item=noticias}
+            <div>
+                <li>
+                    <h2>Titulo: {$noticias->title}</h2>
+                </li>
+                Autor: {$noticias->author}
                 <br>
-            {/if}
-        </div>
-    {/foreach}
+                Detalles: {$noticias->details}
+                <br>
+                Categoria: {$noticias->name_category}
+                <br>
+                {if ($noticias->author)=={$username}}
+                    <small><a href="update/{$noticias->id_news}"> Cambiar </a></small>
+                    <br>
+                    <small><a href="delete/{$noticias->id_news}"> Delete </a></small>
+                    <br>
+                {/if}
+            </div>
+        {/foreach}
+    </div>
+
 
 </ul>
 

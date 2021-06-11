@@ -55,8 +55,8 @@ switch ($urlParts[0]) {
 	case 'new':
 		$NoticiaController->addNews();
 		break;
-	case 'seen':
-		$NoticiaController->marcar($urlParts[1]);
+	case 'update':
+		$NoticiaController->renderUpdate($urlParts[1]);
 		break;
 	case 'logout':
 		$UserController->logout();

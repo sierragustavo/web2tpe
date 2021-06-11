@@ -3,16 +3,16 @@
 {if isset($username) && $username}
     <form action="newCategory" method="POST">
         <label>Categoria</label>
-        <input type="text" name="name">
+        <input type="text" name="name_category">
         <button type="submit">Enviar</button>
     </form>
 {/if}
 
 {foreach from=$categories item=category}
-<a>{$category->name}
-<small><a href="deleteCategory/{$category->id}"> Delete </a></small>
+<a>{$category->name_category}
+<small><a href="deleteCategory/{$category->id_category}"> Delete </a></small>
 <br>
-{{/foreach}}
+{/foreach}
 
 <a>{$mensaje}</a>
 

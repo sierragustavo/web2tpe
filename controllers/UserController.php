@@ -27,8 +27,9 @@ class UserController
                 $this->view->renderLogin("Password o usuario incorrecto");
                 die();
             }
+        } else {
+            $this->view->renderLogin("Login incompleto");
         }
-        $this->view->renderLogin("Login incompleto");
     }
 
     function login()

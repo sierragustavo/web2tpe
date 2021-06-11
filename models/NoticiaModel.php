@@ -6,14 +6,14 @@ class NoticiaModel extends DBModel
 {
     function getAll()
     {
-        $query = $this->getDb()->prepare('SELECT * FROM news');
+        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     function get($id)
     {
-        $query = $this->getDb()->prepare('SELECT * FROM news WHERE id = ?');
+        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category WHERE id_news = ?');
         $query->execute(array(($id)));
         return $query->fetch(PDO::FETCH_OBJ);
     }
@@ -25,30 +25,9 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function newCategory($name)
-    {
-        $query = $this->getDb()->prepare('INSERT INTO categories (name)VALUES (?)');
-        $query->execute([$name]);
-        return $query->fetch(PDO::FETCH_OBJ);
-    }
-
-    function deleteCategory($id)
-    {
-        $query = $this->getDb()->prepare('DELETE FROM categories WHERE id= ?');
-        $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_OBJ); //ACA QUIERO SABER COMO DEVOLVER ALGO SI FUNCIONO O NO LA QUERY
-    }
-
-    function getCategories()
-    {
-        $query = $this->getDb()->prepare('SELECT * FROM categories');
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_OBJ);
-    }
-
     function getNewsByCategory($id_news)
     {
-        $query = $this->getDb()->prepare('SELECT * FROM news WHERE category_pk=?');
+        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category WHERE category_pk=?');
         $query->execute([$id_news]);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
@@ -59,7 +38,7 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function markSeen($id)
+    function update($id)
     {
         $query = $this->getDb()->prepare('UPDATE news SET seen = true WHERE id = ?');
         $query->execute([$id]);

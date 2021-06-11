@@ -1,7 +1,7 @@
 <?php
 
-require_once('smarty/libs/Smarty.class.php');
-require_once('helpers/AuthHelper.php');
+require_once('./smarty/libs/Smarty.class.php');
+require_once('./helpers/AuthHelper.php');
 class View
 {
     private $smarty;
@@ -26,10 +26,6 @@ class View
         return $username;
     }
 
-    public function renderHome()
-    {
-        $this->smarty->display('templates/home.tpl');
-    }
     public function renderContact()
     {
         $this->smarty->display('templates/contact.tpl');

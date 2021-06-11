@@ -50,6 +50,9 @@ body {
     display: none;
 }
 
+.noticia-container{
+    width: 75%;
+}
 /* Menu Responsive */
 
 @media screen and (max-width: 864px) {

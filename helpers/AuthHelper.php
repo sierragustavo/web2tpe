@@ -21,7 +21,6 @@ Class AuthHelper
     }
 
     public static function logout() {
-        self::start();
         session_destroy();
     }
 
@@ -29,7 +28,7 @@ Class AuthHelper
         self::start();
         if (!isset($_SESSION['ID_USER'])){
             header('Location: ' . BASE_URL . "home");
-            die;
+            die();
         }
         else{
             return true;
