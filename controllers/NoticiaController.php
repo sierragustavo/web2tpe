@@ -85,7 +85,7 @@ class NoticiaController
     }
 
     public function detalleNoticia($id){
-        $this->modelNoticia->get($id);
-        
+        $query = $this->modelNoticia->get($id);
+        $this->view->renderDetails($query);
     }
 }

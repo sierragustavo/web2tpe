@@ -27,18 +27,16 @@
         <button type="submit">FILTRAR</button>
     </form>
 
-    
+
     <div class="noticia-container">
         {foreach from=$news item=noticias}
             <div>
-                <li>
-                    <h2>Titulo: {$noticias->title}</h2>
-                </li>
+                <h2>Titulo: {$noticias->title}</h2>
                 Autor: {$noticias->author}
                 <br>
-                Detalles: {$noticias->details}
-                <br>
                 Categoria: {$noticias->name_category}
+                <br>
+                <small><a href="details/{$noticias->id_news}"> Detalles </a></small>
                 <br>
                 {if ($noticias->author)=={$username}}
                     <small><a href="update/{$noticias->id_news}"> Cambiar </a></small>
