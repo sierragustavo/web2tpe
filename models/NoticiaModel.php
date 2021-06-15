@@ -18,7 +18,7 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function new($title, $details, $categoryID, $author)
+    function new($title, $details, $categoryID, $author, $image = null)
     {
         $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
         $query->execute([$title, $details, $categoryID, $author]);
