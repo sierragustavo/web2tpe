@@ -3,9 +3,9 @@
 <div>
 <form action="updateForm" method="POST">
 <label>Titulo</label>
-<input type="text" name="title" placeholder={$new->title}>
+<input type="text" name="title" placeholder="{$new->title}">
 <label>Detalles</label>
-<textarea name="details" placeholder={$new->details}></textarea>
+<textarea name="details" placeholder="{$new->details}"></textarea>
 <label>Categoría</label>
 <select name="category">
 {foreach from=$categories item=category}

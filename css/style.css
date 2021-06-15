@@ -13,8 +13,9 @@ body {
     margin-bottom: 50px;
 }
 
-/* menu: */
-
+.header-box{
+    display: -webkit-inline-box;
+}
 .innk {
     background-color: rgb(14, 99, 102);
 }
@@ -451,11 +452,10 @@ tr:nth-child(even) {
 
 }
 .logo-login{
-    width: 35%;
     height: 55%;
     position: absolute;   
     top: -180px;
-    left: calc(50% - 90px);
+    left: 100px;
 }
 
 .logincaja form{

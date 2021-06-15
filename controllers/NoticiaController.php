@@ -32,7 +32,7 @@ class NoticiaController
 
     public function addNews() //FORM ADD NOTICIA
     {
-        //AuthHelper::checkLoggedIn();
+        AuthHelper::checkLoggedIn();
         $title = $_POST['title'];
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
@@ -43,7 +43,7 @@ class NoticiaController
 
     public function deleteNews($id)  //DELETE NEWS
     {
-        //AuthHelper::checkLoggedIn();
+        AuthHelper::checkLoggedIn();
         $this->modelNoticia->delete($id);
         header("Location:" . BASE_URL . 'home');
     }
@@ -66,13 +66,15 @@ class NoticiaController
 
     public function deleteCategory($id) //BORRAR CATEGORIA
     {
+        AuthHelper::checkLoggedIn();
         $this->modelCategory->deleteCategory($id);
         header("Location:" . BASE_URL . 'manager_categories');
     }
 
     public function renderUpdate($id){
-        $categories = $this->modelCategory->getCategories();
+        AuthHelper::checkLoggedIn();
         $queryNoticia = $this->modelNoticia->get($id);
+        $categories = $this->modelCategory->getCategories();
         $this->view->renderUpdate($queryNoticia,$categories);
     }
 
@@ -80,5 +82,10 @@ class NoticiaController
     {
         $this->modelNoticia->update($id,$title,$details,$categoryID);
         header("Location:" . BASE_URL . 'home');
+    }
+
+    public function detalleNoticia($id){
+        $this->modelNoticia->get($id);
+        
     }
 }

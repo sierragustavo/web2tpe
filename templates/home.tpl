@@ -26,6 +26,8 @@
         </select>
         <button type="submit">FILTRAR</button>
     </form>
+
+    
     <div class="noticia-container">
         {foreach from=$news item=noticias}
             <div>

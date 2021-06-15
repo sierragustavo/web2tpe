@@ -6,6 +6,7 @@ class View
 {
     private $smarty;
     private $authhelper;
+    
     public function __construct()
     {
         $this->smarty = new Smarty();

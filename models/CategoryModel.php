@@ -16,8 +16,8 @@ class CategoryModel extends DBModel
     {
         $query = $this->getDb()->prepare('DELETE FROM categories WHERE id_category= ?');
         $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_OBJ); //ACA QUIERO SABER COMO DEVOLVER ALGO SI FUNCIONO O NO LA QUERY
-    }
+        return $query->fetch(PDO::FETCH_OBJ);
+    } //ACA QUIERO SABER COMO DEVOLVER ALGO SI FUNCIONO O NO LA QUERY
 
     function getCategories()
     {

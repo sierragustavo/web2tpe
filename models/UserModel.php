@@ -14,7 +14,7 @@ class UserModel extends DBModel
     public function obtenerUserByUsername($username)
     {
         $query = $this->getDb()->prepare('SELECT * FROM user WHERE username = ?');
-        $query->execute(array(($username)));
+        $query->execute([$username]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
     public function isMailInUse($email)
