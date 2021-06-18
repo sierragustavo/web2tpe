@@ -24,14 +24,13 @@ class NoticiaController
         $categories = $this->modelCategory->getCategories();
         $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
         $newsAlt = $news;
-        if (isset($_GET['pagina'])) 
+        if (isset($_GET['pagina']))
             $paginaActual = $_GET['pagina'];
-         else 
+        else
             $paginaActual = 1;
-        
         $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
-        $cantidadPaginas = count($newsAlt);
-        $this->view->showAllNews($news, $categories,$paginaActual,$cantidadPaginas);
+        $cantidadPaginas = count($newsAlt)/LIMITE_PAGINADOR;
+        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas);
     }
 
     public function showManage() //PAGINA CATEGORIAS
@@ -61,9 +60,16 @@ class NoticiaController
     public function filtrar()
     {
         $id_category = $_POST['inputFiltrar'];
-        $filtrado = $this->modelNoticia->getNewsByCategory($id_category);
+        $news = $this->modelNoticia->getNewsByCategory($id_category);
         $categories = $this->modelCategory->getCategories();
-        $this->view->showAllNews($filtrado, $categories);
+        $newsAlt = $news;
+        if (isset($_GET['pagina']))
+            $paginaActual = $_GET['pagina'];
+        else
+            $paginaActual = 1;
+        $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
+        $cantidadPaginas = count($newsAlt) / LIMITE_PAGINADOR;
+        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas);
     }
 
     public function addCategory() //ADD
