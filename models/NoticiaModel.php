@@ -18,11 +18,15 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function new($title, $details, $categoryID, $author, $image = null)
+    function new($title, $details, $categoryID, $author)
     {
         $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
         $query->execute([$title, $details, $categoryID, $author]);
         return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function getNewsPorPagina($pagina){
+        
     }
 
     function getNewsByCategory($id_news)

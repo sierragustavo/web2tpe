@@ -4,6 +4,8 @@ include_once './models/NoticiaModel.php';
 include_once './views/NoticiaView.php';
 include_once './models/CategoryModel.php';
 
+define('LIMITE_PAGINADOR', 3);
+
 class NoticiaController
 {
     private $modelNoticia;
@@ -19,9 +21,17 @@ class NoticiaController
 
     public function showNews()
     {
-        $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
         $categories = $this->modelCategory->getCategories();
-        $this->view->showAllNews($news, $categories);
+        $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
+        $newsAlt = $news;
+        if (isset($_GET['pagina'])) 
+            $paginaActual = $_GET['pagina'];
+         else 
+            $paginaActual = 1;
+        
+        $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
+        $cantidadPaginas = count($newsAlt);
+        $this->view->showAllNews($news, $categories,$paginaActual,$cantidadPaginas);
     }
 
     public function showManage() //PAGINA CATEGORIAS
@@ -37,7 +47,7 @@ class NoticiaController
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
         $author = AuthHelper::getLoggedUserName();
-        $this->model->new($title, $details, $categoryID, $author);
+        $this->modelNoticia->new($title, $details, $categoryID, $author);
         header("Location:" . BASE_URL . 'home');
     }
 
@@ -71,20 +81,22 @@ class NoticiaController
         header("Location:" . BASE_URL . 'manager_categories');
     }
 
-    public function renderUpdate($id){
+    public function renderUpdate($id)
+    {
         AuthHelper::checkLoggedIn();
         $queryNoticia = $this->modelNoticia->get($id);
         $categories = $this->modelCategory->getCategories();
-        $this->view->renderUpdate($queryNoticia,$categories);
+        $this->view->renderUpdate($queryNoticia, $categories);
     }
 
-    public function updateNoticia($id,$title,$details,$categoryID) //ACTUALIZAR CATEGORIA
+    public function updateNoticia($id, $title, $details, $categoryID) //ACTUALIZAR CATEGORIA
     {
-        $this->modelNoticia->update($id,$title,$details,$categoryID);
+        $this->modelNoticia->update($id, $title, $details, $categoryID);
         header("Location:" . BASE_URL . 'home');
     }
 
-    public function detalleNoticia($id){
+    public function detalleNoticia($id)
+    {
         $query = $this->modelNoticia->get($id);
         $this->view->renderDetails($query);
     }

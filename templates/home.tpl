@@ -15,8 +15,8 @@
         <button type="submit">Enviar</button>
     </form>
 {/if}
-<ul>
 
+<div>
     <form action="filtrar" method="POST">
         <label>Categoria:</label>
         <select name="inputFiltrar">
@@ -26,11 +26,12 @@
         </select>
         <button type="submit">FILTRAR</button>
     </form>
+</div>
 
-
-    <div class="noticia-container">
+<div class="noticia-container">
+    <ul>
         {foreach from=$news item=noticias}
-            <div>
+            <li>
                 <h2>Titulo: {$noticias->title}</h2>
                 Autor: {$noticias->author}
                 <br>
@@ -44,11 +45,16 @@
                     <small><a href="delete/{$noticias->id_news}"> Delete </a></small>
                     <br>
                 {/if}
-            </div>
+            </li>
         {/foreach}
-    </div>
+    </ul>
+</div>
 
+<a href="home/?pagina={$paginaActual + 1}">Siguiente</a>
 
-</ul>
+{for $i = 0 to $cantidadPaginas}
+    <a href="home/?pagina={$i}">{$i}</a>
+{/for}
+
 
 {include 'templates/footer.tpl'}
