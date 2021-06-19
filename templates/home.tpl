@@ -1,9 +1,9 @@
 {include 'templates/header.tpl'}
 
 <div>
-    <form action="filtrar" method="POST">
+    <form method="GET">
         <label for="input-filtrar">Categoria:</label>
-        <select name="inputFiltrar" id="input-filtrar" class="category-select">
+        <select name="filtrar" id="input-filtrar" class="category-select">
             {foreach from=$categories item=category}
                 <option value={$category->id_category}>{$category->name_category}</option>
             {/foreach}
@@ -21,12 +21,12 @@
                 <br>
                 Categoria: {$noticias->name_category}
                 <br>
-                <small><a href="details/{$noticias->id_news}"> Detalles </a></small>
+                <small><a href="{$base_url}details/{$noticias->id_news}"> Detalles </a></small>
                 <br>
                 {if ($noticias->author)=={$username}}
-                    <small><a href="update/{$noticias->id_news}"> Cambiar </a></small>
+                    <small><a href="{$base_url}update/{$noticias->id_news}"> Cambiar </a></small>
                     <br>
-                    <small><a href="delete/{$noticias->id_news}"> Delete </a></small>
+                    <small><a href="{$base_url}delete/{$noticias->id_news}"> Delete </a></small>
                     <br>
                 {/if}
             </li>

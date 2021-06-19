@@ -12,12 +12,14 @@ class NoticiaView extends View
         $this->getSmarty()->assign('username', $username);
     }
 
-    function showAllNews($news, $categories,$paginaActual,$cantidadPaginas)
+    function showAllNews($news, $categories, $paginaActual, $cantidadPaginas, $filtrando, $id_category = null)
     {
         $this->getSmarty()->assign('news', $news);
         $this->getSmarty()->assign('categories', $categories);
         $this->getSmarty()->assign('paginaActual', $paginaActual);
         $this->getSmarty()->assign('cantidadPaginas', $cantidadPaginas);
+        $this->getSmarty()->assign('filtrando', $filtrando); //si tiene el parametro ?filtro, viene true
+        $this->getSmarty()->assign('id_category', $id_category); //si tiene el parametro ?filtro, viene true
         $this->getSmarty()->display('templates/home.tpl'); // muestro el template   
     }
 

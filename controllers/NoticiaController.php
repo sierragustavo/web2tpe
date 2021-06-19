@@ -22,15 +22,23 @@ class NoticiaController
     public function showNews()
     {
         $categories = $this->modelCategory->getCategories();
-        $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
-        $newsAlt = $news;
         if (isset($_GET['pagina']))
             $paginaActual = $_GET['pagina'];
         else
             $paginaActual = 1;
+        if (isset($_GET['filtrar'])) {
+            $id_category = $_GET['filtrar'];
+            $news = $this->modelNoticia->getNewsByCategory($id_category);
+            $filtrando = true;
+        } else {
+            $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
+            $filtrando = false;
+            $id_category = 0; //para que funcione
+        }
+        $newsAlt = $news;
         $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
-        $cantidadPaginas = count($newsAlt)/LIMITE_PAGINADOR;
-        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas);
+        $cantidadPaginas = count($newsAlt) / LIMITE_PAGINADOR;
+        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas, $filtrando, $id_category);
     }
 
     public function showManage() //PAGINA CATEGORIAS
@@ -55,21 +63,6 @@ class NoticiaController
         AuthHelper::checkLoggedIn();
         $this->modelNoticia->delete($id);
         header("Location:" . BASE_URL . 'home');
-    }
-
-    public function filtrar()
-    {
-        $id_category = $_POST['inputFiltrar'];
-        $news = $this->modelNoticia->getNewsByCategory($id_category);
-        $categories = $this->modelCategory->getCategories();
-        $newsAlt = $news;
-        if (isset($_GET['pagina']))
-            $paginaActual = $_GET['pagina'];
-        else
-            $paginaActual = 1;
-        $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
-        $cantidadPaginas = count($newsAlt) / LIMITE_PAGINADOR;
-        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas);
     }
 
     public function addCategory() //ADD
