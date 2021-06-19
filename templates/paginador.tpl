@@ -10,7 +10,7 @@
         <a href="{$base_url}home/?pagina={$i+1}{if $filtrando==true}&filtrar={$id_category}{/if}">{$i+1}</a>
     {/if}
 
-{/for} <!--ESTE FOR FUNCIONA PERO NO LO TOMA EL IDENTADOR-->
+{/for}
 
 {if $paginaActual-1 != $cantidadPaginas}
     <a href="{$base_url}home/?pagina={$paginaActual + 1}{if $filtrando==true}&filtrar={$id_category}{/if}">Siguiente</a>
