@@ -1,8 +1,22 @@
 {include 'templates/header.tpl'}
 
+{if isset($username) && $username}
+    <form action="new" method="POST">
+        <label>Titulo</label>
+        <input type="text" name="title">
+        <label>Detalles</label>
+        <textarea type="text" name="details"></textarea>
+        <label>Categoría</label>
+        <select name="category">
+            {foreach from=$categories item=category}
+                <option value={$category->id_category}>{$category->name_category}</option>
+            {/foreach}
+        </select>
+        <button type="submit">Enviar</button>
+    </form>
+{/if}
 
-<ul>
-
+<div>
     <form action="filtrar" method="POST">
         <label>Categoria:</label>
         <select name="inputFiltrar">
@@ -12,12 +26,13 @@
         </select>
         <button type="submit">FILTRAR</button>
     </form>
+</div>
 
-
-    <div class="noticia-container">
+<div class="noticia-container">
+    <ul>
         {foreach from=$news item=noticias}
-            <div>
-                <h2>{$noticias->title}</h2>
+            <li>
+                <h2>Titulo: {$noticias->title}</h2>
                 Autor: {$noticias->author}
                 <br>
                 Categoria: {$noticias->name_category}
@@ -30,11 +45,11 @@
                     <small><a href="delete/{$noticias->id_news}"> Delete </a></small>
                     <br>
                 {/if}
-            </div>
+            </li>
         {/foreach}
-    </div>
+    </ul>
+</div>
 
-
-</ul>
+{include 'templates/paginador.tpl'}
 
 {include 'templates/footer.tpl'}

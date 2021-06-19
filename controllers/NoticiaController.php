@@ -4,6 +4,8 @@ include_once './models/NoticiaModel.php';
 include_once './views/NoticiaView.php';
 include_once './models/CategoryModel.php';
 
+define('LIMITE_PAGINADOR', 3);
+
 class NoticiaController
 {
     private $modelNoticia;
@@ -19,9 +21,16 @@ class NoticiaController
 
     public function showNews()
     {
-        $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
         $categories = $this->modelCategory->getCategories();
-        $this->view->showAllNews($news, $categories);
+        $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
+        $newsAlt = $news;
+        if (isset($_GET['pagina']))
+            $paginaActual = $_GET['pagina'];
+        else
+            $paginaActual = 1;
+        $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
+        $cantidadPaginas = count($newsAlt)/LIMITE_PAGINADOR;
+        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas);
     }
 
     public function showManage() //PAGINA CATEGORIAS
@@ -37,14 +46,7 @@ class NoticiaController
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
         $author = AuthHelper::getLoggedUserName();
-        $image = $_POST['image_name'];
-        /*if (
-            $_POST['image_name']['type'] == "image/jpg" || $_FILES['image_name']['type'] == "image/jpeg"
-            || $_FILES['image_name']['type'] == "image/png"
-        )*/
-        $this->modelNoticia->new($title, $details, $categoryID, $author, $image);
-        /* else
-            $this->model->new($title, $details, $categoryID, $author);*/
+        $this->modelNoticia->new($title, $details, $categoryID, $author);
         header("Location:" . BASE_URL . 'home');
     }
 
@@ -58,9 +60,16 @@ class NoticiaController
     public function filtrar()
     {
         $id_category = $_POST['inputFiltrar'];
-        $filtrado = $this->modelNoticia->getNewsByCategory($id_category);
+        $news = $this->modelNoticia->getNewsByCategory($id_category);
         $categories = $this->modelCategory->getCategories();
-        $this->view->showAllNews($filtrado, $categories);
+        $newsAlt = $news;
+        if (isset($_GET['pagina']))
+            $paginaActual = $_GET['pagina'];
+        else
+            $paginaActual = 1;
+        $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
+        $cantidadPaginas = count($newsAlt) / LIMITE_PAGINADOR;
+        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas);
     }
 
     public function addCategory() //ADD

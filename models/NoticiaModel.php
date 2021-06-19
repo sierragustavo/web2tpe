@@ -18,7 +18,7 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function new($title, $details, $categoryID, $author, $image = null)
+    function new($title, $details, $categoryID, $author)
     {
         $pathImagen = null;
         if ($image) {
