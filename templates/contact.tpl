@@ -2,7 +2,6 @@
 
 <div class="content">
       <h1 class="contact-us">Contact <span class="us-color">Us</span></h1>
-
       <div class="contact-form">
         <form action="">
           <div class="contact-form-right">

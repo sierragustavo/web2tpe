@@ -3,7 +3,7 @@
 <div>
     <form action="filtrar" method="POST">
         <label for="input-filtrar">Categoria:</label>
-        <select name="inputFiltrar" id="input-filtrar">
+        <select name="inputFiltrar" id="input-filtrar" class="category-select">
             {foreach from=$categories item=category}
                 <option value={$category->id_category}>{$category->name_category}</option>
             {/foreach}

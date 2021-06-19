@@ -598,6 +598,9 @@ tr:nth-child(even) {
 
 }
 
+.category-select {
+    width:max-content;
+}
 
 .registro a {
     padding: 15px;

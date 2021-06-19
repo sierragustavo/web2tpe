@@ -3,13 +3,14 @@
 
 
 {if isset($username) && $username}
+    <h1 class="contact-us">Agregar<span class="us-color"> Noticia</span></h1>
     <div class="contact-form">
         <form action="new" method="POST">
-            <div class="contact-form-right">
+            <div class="contact-form-left">
                 <label for="title">Titulo</label>
                 <input type="text" name="title" id="title">
                 <label for="category">Categoría</label>
-                <select name="category" id="category">
+                <select name="category" id="category" class="category-select">
                     {foreach from=$categories item=category}
                         <option value={$category->id_category}>{$category->name_category}</option>
                     {/foreach}
@@ -18,7 +19,7 @@
                 <input type="file" name="image_name" id="imageUpload" accept=".jpg,.png,.jpeg">
                 <small>solo jpg, jpeg o png</small>
             </div>
-            <div class="contaft-form-left">
+            <div class="contact-form-right">
                 <label for="details">Detalles</label>
                 <textarea type="text" name="details" id="details"></textarea>
                 <button type="submit">Enviar</button>
