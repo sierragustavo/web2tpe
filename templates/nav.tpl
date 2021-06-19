@@ -6,8 +6,8 @@
 {if isset($username) && $username}
     <a href="{$base_url}manager_categories" class="button-menu">CATEGORIES</a>
     <a href="{$base_url}form_news" class="button-menu">AGREGAR</a>
-    <a class="button-menu-end" href="{$base_url}logout">LOGOUT</a>
     <a class="innk">{$username}</a>
+    <a class="button-menu-end" href="{$base_url}logout">LOGOUT</a>
 {else}
     <a href="{$base_url}login" class="button-menu-end">
         <div class="login">LOGIN</div>
