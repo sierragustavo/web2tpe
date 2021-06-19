@@ -1,6 +1,39 @@
 {include 'templates/header.tpl'}
 
-<div class="content">
+
+
+{if isset($username) && $username}
+    <div class="contact-form">
+        <form action="new" method="POST">
+            <div class="contact-form-right">
+                <label for="title">Titulo</label>
+                <input type="text" name="title" id="title">
+                <label for="category">Categoría</label>
+                <select name="category" id="category">
+                    {foreach from=$categories item=category}
+                        <option value={$category->id_category}>{$category->name_category}</option>
+                    {/foreach}
+                </select>
+                <label for="imageUpload">Subir imagen</label>
+                <input type="file" name="image_name" id="imageUpload" accept=".jpg,.png,.jpeg">
+                <small>solo jpg, jpeg o png</small>
+            </div>
+            <div class="contaft-form-left">
+                <label for="details">Detalles</label>
+                <textarea type="text" name="details" id="details"></textarea>
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+{else}
+    <h1> Necesita estar logeado para ver este contenido</h1>
+{/if}
+
+
+{include 'templates/footer.tpl'}
+
+
+<!--<div class="content">
       <h1 class="contact-us">Contact <span class="us-color">Us</span></h1>
 
       <div class="contact-form">
@@ -50,5 +83,4 @@
       </div>
       {/if}
     </div>
-
-    {include 'templates/footer.tpl'}
+-->

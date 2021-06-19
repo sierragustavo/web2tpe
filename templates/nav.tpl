@@ -5,6 +5,7 @@
 <a href="{$base_url}contact" class="button-menu">CONTACT US</a>
 {if isset($username) && $username}
     <a href="{$base_url}manager_categories" class="button-menu">CATEGORIES</a>
+    <a href="{$base_url}form_news" class="button-menu">AGREGAR</a>
     <a class="button-menu-end" href="{$base_url}logout">LOGOUT</a>
     <a class="innk">{$username}</a>
 {else}

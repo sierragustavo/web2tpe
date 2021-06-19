@@ -20,9 +20,19 @@ class NoticiaModel extends DBModel
 
     function new($title, $details, $categoryID, $author, $image = null)
     {
+        $pathImagen = null;
+        if ($image) {
+            $pathImagen = $this->uploadImage($image);
+        }
         $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
         $query->execute([$title, $details, $categoryID, $author]);
         return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function uploadImage($image)
+    {
+        $ext = pathinfo($image, PATHINFO_EXTENSION);
+        $target = 'uploads/news/' . uniqid() . $ext;
     }
 
     function getNewsByCategory($id_news)
@@ -33,14 +43,14 @@ class NoticiaModel extends DBModel
     }
     function delete($id)
     {
-        $query = $this->getDb()->prepare('DELETE FROM news WHERE id = ?');
+        $query = $this->getDb()->prepare('DELETE FROM news WHERE id_news = ?');
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
     function update($id)
     {
-        $query = $this->getDb()->prepare('UPDATE news SET seen = true WHERE id = ?');
+        $query = $this->getDb()->prepare('UPDATE news SET seen = true WHERE id_news = ?');
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }

@@ -1,20 +1,6 @@
 {include 'templates/header.tpl'}
 
-{if isset($username) && $username}
-    <form action="new" method="POST">
-        <label>Titulo</label>
-        <input type="text" name="title">
-        <label>Detalles</label>
-        <textarea type="text" name="details"></textarea>
-        <label>Categoría</label>
-        <select name="category">
-            {foreach from=$categories item=category}
-                <option value={$category->id_category}>{$category->name_category}</option>
-            {/foreach}
-        </select>
-        <button type="submit">Enviar</button>
-    </form>
-{/if}
+
 <ul>
 
     <form action="filtrar" method="POST">
@@ -31,7 +17,7 @@
     <div class="noticia-container">
         {foreach from=$news item=noticias}
             <div>
-                <h2>Titulo: {$noticias->title}</h2>
+                <h2>{$noticias->title}</h2>
                 Autor: {$noticias->author}
                 <br>
                 Categoria: {$noticias->name_category}

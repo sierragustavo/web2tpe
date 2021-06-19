@@ -61,6 +61,9 @@ switch ($urlParts[0]) {
 	case 'update':
 		$NoticiaController->renderUpdate($urlParts[1]);
 		break;
+	case 'form_news':
+		$NoticiaController->renderFormNews();
+		break;
 	case 'logout':
 		$UserController->logout();
 		$NoticiaController->showNews();

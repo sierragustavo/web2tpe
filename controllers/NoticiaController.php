@@ -37,7 +37,14 @@ class NoticiaController
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
         $author = AuthHelper::getLoggedUserName();
-        $this->model->new($title, $details, $categoryID, $author);
+        $image = $_POST['image_name'];
+        /*if (
+            $_POST['image_name']['type'] == "image/jpg" || $_FILES['image_name']['type'] == "image/jpeg"
+            || $_FILES['image_name']['type'] == "image/png"
+        )*/
+        $this->modelNoticia->new($title, $details, $categoryID, $author, $image);
+        /* else
+            $this->model->new($title, $details, $categoryID, $author);*/
         header("Location:" . BASE_URL . 'home');
     }
 
@@ -71,20 +78,28 @@ class NoticiaController
         header("Location:" . BASE_URL . 'manager_categories');
     }
 
-    public function renderUpdate($id){
+    public function renderUpdate($id)
+    {
         AuthHelper::checkLoggedIn();
         $queryNoticia = $this->modelNoticia->get($id);
         $categories = $this->modelCategory->getCategories();
-        $this->view->renderUpdate($queryNoticia,$categories);
+        $this->view->renderUpdate($queryNoticia, $categories);
     }
 
-    public function updateNoticia($id,$title,$details,$categoryID) //ACTUALIZAR CATEGORIA
+    public function renderFormNews()
     {
-        $this->modelNoticia->update($id,$title,$details,$categoryID);
+        $categories = $this->modelCategory->getCategories();
+        $this->view->renderFormNews($categories);
+    }
+
+    public function updateNoticia($id, $title, $details, $categoryID) //ACTUALIZAR CATEGORIA
+    {
+        $this->modelNoticia->update($id, $title, $details, $categoryID);
         header("Location:" . BASE_URL . 'home');
     }
 
-    public function detalleNoticia($id){
+    public function detalleNoticia($id)
+    {
         $query = $this->modelNoticia->get($id);
         $this->view->renderDetails($query);
     }
