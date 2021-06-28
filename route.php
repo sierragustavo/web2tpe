@@ -28,6 +28,9 @@ switch ($urlParts[0]) {
 	case 'manager_categories':
 		$NoticiaController->showManage();
 		break;
+	case 'manager_users':
+		$UserController->showUserList();
+		break;
 	case 'newCategory':
 		$NoticiaController->addCategory();
 		break;

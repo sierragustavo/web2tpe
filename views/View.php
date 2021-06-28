@@ -6,14 +6,17 @@ class View
 {
     private $smarty;
     private $authhelper;
-    
+
     public function __construct()
     {
         $this->smarty = new Smarty();
         $this->smarty->assign('base_url', BASE_URL);
         $this->authhelper = new AuthHelper();
         $username = $this->authhelper->getLoggedUserName();
+        $is_admin = $this->authhelper->getUserStatus();
         $this->getSmarty()->assign('username', $username);
+        $this->getSmarty()->assign('is_admin', $is_admin);
+
     }
 
     public function getSmarty()

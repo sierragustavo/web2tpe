@@ -27,7 +27,7 @@ class NoticiaView extends View
     {
         $this->getSmarty()->assign('mensaje', $mensaje);
         $this->getSmarty()->assign('categories', $categories);
-        $this->getSmarty()->display('templates/manager.tpl');
+        $this->getSmarty()->display('templates/manager_categories.tpl');
     }
 
     function renderUpdate($new, $categories)

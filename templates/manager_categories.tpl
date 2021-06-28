@@ -10,7 +10,7 @@
 
 {foreach from=$categories item=category}
 <a>{$category->name_category}
-<small><a href="deleteCategory/{$category->id_category}"> Delete </a></small>
+<small><a href="{$base_url}deleteCategory/{$category->id_category}"> Delete </a></small>
 <br>
 {/foreach}
 

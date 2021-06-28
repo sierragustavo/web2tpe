@@ -18,6 +18,12 @@ class UserView extends View
         $this->getSmarty()->display('templates/login.tpl');
     }
 
+    public function renderUserList($userList)
+    {
+        $this->getSmarty()->assign('users', $userList);
+        $this->getSmarty()->display('templates/manager_user.tpl');
+    }
+
     public function renderRegister($mensaje = null)
     {
         $this->getSmarty()->assign('mensaje', $mensaje);

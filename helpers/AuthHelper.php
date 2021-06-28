@@ -19,6 +19,19 @@ class AuthHelper
         $_SESSION['IS_LOGGED'] = true;
         $_SESSION['ID_USER'] = $user->id_user;
         $_SESSION['USERNAME'] = $user->username;
+        if ($user->admin == 1)
+            $_SESSION['IS_ADMIN'] = true;
+        else
+            $_SESSION['IS_ADMIN'] = false;
+    }
+
+    public function getUserStatus(){
+        self::start();
+        if (isset($_SESSION['IS_ADMIN']) && $_SESSION['IS_ADMIN'] == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function logout()

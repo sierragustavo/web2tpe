@@ -11,6 +11,13 @@ class UserModel extends DBModel
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getUserList()
+    {
+        $query = $this->getDb()->prepare('SELECT username, password, email, id_user, admin from user');
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function obtenerUserByUsername($username)
     {
         $query = $this->getDb()->prepare('SELECT * FROM user WHERE username = ?');

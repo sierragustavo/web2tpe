@@ -12,7 +12,7 @@
 
         <input type="submit" value="Log In">
     </form>
-    <a href="register">You dont acount?</a>
+    <a href="{$base_url}register">Create your account</a>
 </div>
 <a>{$mensaje}</a>
 {include 'templates/footer.tpl'}

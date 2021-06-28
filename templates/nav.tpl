@@ -4,8 +4,9 @@
 <a href="{$base_url}dpsTierList" class="button-menu">DPS TIER LIST</a>
 <a href="{$base_url}contact" class="button-menu">CONTACT US</a>
 {if isset($username) && $username}
-    <a href="{$base_url}manager_categories" class="button-menu">CATEGORIES</a>
-    <a href="{$base_url}form_news" class="button-menu">AGREGAR</a>
+    <a href="{$base_url}manager_categories" class="button-menu">MANAGER CATEGORIES</a>
+    <a href="{$base_url}manager_users" class="button-menu">MANAGER USERS</a>
+    <a href="{$base_url}form_news" class="button-menu">AGREGAR NEWS</a>
     <a class="innk">{$username}</a>
     <a class="button-menu-end" href="{$base_url}logout">LOGOUT</a>
 {else}

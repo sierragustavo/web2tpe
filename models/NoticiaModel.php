@@ -20,10 +20,6 @@ class NoticiaModel extends DBModel
 
     function new($title, $details, $categoryID, $author)
     {
-        $pathImagen = null;
-        if ($image) {
-            $pathImagen = $this->uploadImage($image);
-        }
         $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
         $query->execute([$title, $details, $categoryID, $author]);
         return $query->fetch(PDO::FETCH_OBJ);

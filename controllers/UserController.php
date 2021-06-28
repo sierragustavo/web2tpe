@@ -48,6 +48,12 @@ class UserController
         $this->view->renderRegister();
     }
 
+    public function showUserList()
+    {
+        $userList = $this->model->getUserList();
+        $this->view->renderUserList($userList);
+    }
+
     function registrarUsuario()
     {
         $user = $_POST['username'];

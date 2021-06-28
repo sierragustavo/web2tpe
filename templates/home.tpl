@@ -5,12 +5,14 @@
         <label for="input-filtrar">Categoria:</label>
         <select name="filtrar" id="input-filtrar" class="category-select">
             {foreach from=$categories item=category}
-                <option value={$category->id_category}>{$category->name_category}</option>
+                <option {if $filtrando==true} {if $category->id_category == {$id_category}} selected {/if} {/if}
+                    value={$category->id_category}>{$category->name_category}</option>
             {/foreach}
         </select>
         <button type="submit">FILTRAR</button>
     </form>
 </div>
+
 
 <div class="noticia-container">
     <ul>
