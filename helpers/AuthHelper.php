@@ -25,7 +25,7 @@ class AuthHelper
             $_SESSION['IS_ADMIN'] = false;
     }
 
-    public function getUserStatus(){
+    static public function getUserStatus(){
         self::start();
         if (isset($_SESSION['IS_ADMIN']) && $_SESSION['IS_ADMIN'] == true) {
             return true;
