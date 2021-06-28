@@ -35,6 +35,28 @@ class UserModel extends DBModel
         return false;
     }
 
+    public function deleteUser($id)
+    {
+        $query = $this->getDb()->prepare('DELETE FROM `user` WHERE id_user=?');
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function enableAdmin($id)
+    {
+        $query = $this->getDb()->prepare('UPDATE user SET admin = 1 WHERE id_user=?');
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function disableAdmin($id)
+    {
+        $query = $this->getDb()->prepare('UPDATE user SET admin = 0 WHERE id_user=?');
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+
     public function add($user, $pass, $email)
     {
         $passEnc = password_hash($pass, PASSWORD_DEFAULT);

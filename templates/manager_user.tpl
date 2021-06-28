@@ -15,29 +15,24 @@
             <tr>
                 <th>{$user->username}</th>
                 <th>{$user->email}</th>
-                {if ($user->admin) == 0}
-                    <th>
+                <th>
+                    {if ($user->admin) == 0}
                         No
-                    </th>
-                    {if $is_admin == 1}
-                        <th>
-                            <button onclick="{$base_url}delete_user/{$user->id_user}">Borrar Usuario</button>
-                            <button onclick="{$base_url}change_admin/{$user->id_user}">Hacer Admin</button>
-                        </th>
                     {else}
-                        <th>
-                            Si
-                        </th>
-                        {if $is_admin == 1}
-                            <th>
-                                <button onclick="{$base_url}change_admin/{$user->id_user}">Quitar Admin</button>
-                            </th>
-                        {else}
-                            <a>Necesita ser administrador del sitio para ver esto</a>
-                        {/if}
+                        Si
                     {/if}
-                    </th>
-                    <th>
-                    </th>
-                {/foreach}
-                {include 'templates/footer.tpl'}
+                </th>
+                <th>
+                    {if $is_admin == 1}
+                        {if ($user->admin) == 0}
+                            <a href="{$base_url}borrar_usuario/{$user->id_user}"><button>Borrar Usuario</button></a>
+                            <a href="{$base_url}enable_admin/{$user->id_user}"><button>Dar Admin</button></a>
+                        {else}
+                            <a href="{$base_url}disable_admin/{$user->id_user}"><button>Quitar Admin</button></a>
+                        {/if}
+                    {else}
+                        <a>Necesita ser administrador del sitio para ver esto</a>
+                    {/if}
+                </th>
+            {/foreach}
+            {include 'templates/footer.tpl'}

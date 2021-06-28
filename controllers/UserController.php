@@ -75,4 +75,23 @@ class UserController
         $this->model->add($user, $pass, $email);
         $this->view->renderLogin("Mail registrado correctamente");
     }
+
+    function deleteUser($id)
+    {
+        if (AuthHelper::getUserStatus()) {
+            $this->model->deleteUser($id);
+        }
+        $this->showUserList();
+    }
+
+    function enableAdmin($id)
+    {
+        $this->model->enableAdmin($id);
+        $this->showUserList();
+    }
+    function disableAdmin($id)
+    {
+        $this->model->disableAdmin($id);
+        $this->showUserList();
+    }
 }

@@ -24,7 +24,7 @@ class TaskApiController
         return json_decode($this->data);
     }
 
-    public function getNews($params = [])
+    public function getNews()
     {
         // obtengo las tareas
         $news = $this->modelNoticia->getAll();
@@ -33,19 +33,18 @@ class TaskApiController
         $this->view->response($news, 200);
     }
 
-    public function getCategories($params = [])
+    public function getCategories()
     {
         $categories = $this->modelCategory->getCategories();
         $this->view->response($categories, 200);
     }
 
-    public function getNew($params = [])
+    public function getNewById($params = [])
     {
         // obtengo las tareas
         $idNew = $params[':ID'];
 
         $new = $this->modelNoticia->get($idNew);
-
         if ($new) {
             $this->view->response($new, 200);
         } else {
