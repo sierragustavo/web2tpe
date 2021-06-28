@@ -64,9 +64,9 @@ switch ($urlParts[0]) {
 	case 'form_news':
 		$NoticiaController->renderFormNews();
 		break;
-		case 'borrar_usuario':
-			$UserController->deleteUser($urlParts[1]);
-			break;
+	case 'borrar_usuario':
+		$UserController->deleteUser($urlParts[1]);
+		break;
 	case 'enable_admin':
 		$UserController->enableAdmin($urlParts[1]);
 		break;
