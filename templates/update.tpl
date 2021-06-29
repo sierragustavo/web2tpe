@@ -22,7 +22,7 @@
             <label for="imageUpload">Subir imagen</label>
             <input type="file" name="image_name" id="imageUpload" accept=".jpg,.png,.jpeg">
             <small>solo jpg, jpeg o png</small>
-
+            <button type="submit">Cargar</button> 
         </form>
     </div>
 </div>
