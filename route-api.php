@@ -1,6 +1,6 @@
 <?php
 require_once 'libs/Router.php';
-require_once 'api/task-api.controller.php';
+require_once 'api/news-api.controller.php';
 
 // crea el router
 $router = new Router();
