@@ -1,9 +1,9 @@
 <?php
 require_once './models/NoticiaModel.php';
 require_once './models/CategoryModel.php';
-require_once './api/api.view.php';
+require_once 'api.view.php';
 
-class TaskApiController
+class NewsApiController
 {
 
     private $modelNoticia;
@@ -24,7 +24,7 @@ class TaskApiController
         return json_decode($this->data);
     }
 
-    public function getNews()
+    public function getNews($params = [])
     {
         // obtengo las tareas
         $news = $this->modelNoticia->getAll();
@@ -39,38 +39,36 @@ class TaskApiController
         $this->view->response($categories, 200);
     }
 
-    public function getNewById($params = [])
+    public function getNewsById($params = [])
     {
         // obtengo las tareas
-        $idNew = $params[':ID'];
+        $idNews = $params[':ID'];
 
-        $new = $this->modelNoticia->get($idNew);
-        if ($new) {
-            $this->view->response($new, 200);
+        $news = $this->modelNoticia->get($idNews);
+        if ($news) {
+            $this->view->response($news, 200);
         } else {
-            $this->view->response("No se encontro el id $idNew", 400);
+            $this->view->response("No se encontro el id $idNews", 400);
         }
         // se las paso a la vista para que responda JSON
 
     }
 
-    public function addNew($params = [])
+    public function addNews($params = [])
     {
-
-        $datos = $this->getData();
-
+        $datos = $this->getData(); 
         $title = $datos->title;
         $details = $datos->details;
         $id_category = $datos->id_category;
         $author = $datos->author;
-        if (
+        /*if (
             $_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg"
             || $_FILES['input_name']['type'] == "image/png"
         ) {
             $this->modelNoticia->new($title, $details, $id_category, $author, $_FILES['input_name']['tmp_name']);
-        } else {
-            $this->modelNoticia->new($title, $details, $id_category, $author);
-        }
+        } else {*/
+        $this->modelNoticia->new($title, $details, $id_category, $author);
+        //}
         $this->view->response('', 200);
     }
 }
