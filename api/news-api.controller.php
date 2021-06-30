@@ -53,10 +53,16 @@ class NewsApiController
         // se las paso a la vista para que responda JSON
 
     }
+    public function uploadImage($params = [])
+    {
+        $image = $_FILES['image'];
+        $this->modelNoticia->uploadImage($image);
+        $this->view->response('La imagen fue cargada en: ' . $image, 200);
+    }
 
     public function addNews($params = [])
     {
-        $datos = $this->getData(); 
+        $datos = $this->getData();
         $title = $datos->title;
         $details = $datos->details;
         $id_category = $datos->id_category;
@@ -67,8 +73,8 @@ class NewsApiController
         ) {
             $this->modelNoticia->new($title, $details, $id_category, $author, $_FILES['input_name']['tmp_name']);
         } else {*/
-        $this->modelNoticia->new($title, $details, $id_category, $author);
+        $query = $this->modelNoticia->new($title, $details, $id_category, $author);
         //}
-        $this->view->response('', 200);
+        $this->view->response('La noticia fue insertada con el ID: ' . $query, 200);
     }
 }

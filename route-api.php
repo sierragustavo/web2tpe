@@ -10,7 +10,8 @@ $router = new Router();
 $router->addRoute('news', 'GET', 'NewsApiController', 'getNews');
 $router->addRoute('news/:ID', 'GET', 'NewsApiController', 'getNewsById');
 $router->addRoute('addnews', 'POST', 'NewsApiController', 'addNews');
-$router->addRoute('categories','GET','NewsApiController','getCategories');
+$router->addRoute('categories', 'GET', 'NewsApiController', 'getCategories');
+$router->addRoute('uploadimage', 'POST', 'NewsApiController', 'uploadImage');
 
 // rutea
 $router->route($_REQUEST['resource'], $_SERVER['REQUEST_METHOD']);

@@ -22,13 +22,15 @@ class NoticiaModel extends DBModel
     {
         $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
         $query->execute([$title, $details, $categoryID, $author]);
-        return $query->fetch(PDO::FETCH_OBJ);
+        $lastId = $this->getDb()->lastInsertId();
+        return $lastId;
     }
 
     function uploadImage($image)
     {
-        $ext = pathinfo($image, PATHINFO_EXTENSION);
-        $target = 'uploads/news/' . uniqid() . $ext;
+        $target = 'uploads/images/' . uniqid() . 'jpg';
+        move_uploaded_file($image, $target);
+        return $target;
     }
 
     function getNewsByCategory($id_news)
