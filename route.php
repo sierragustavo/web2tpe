@@ -2,6 +2,7 @@
 require_once('controllers/Controller.php');
 require_once('controllers/UserController.php');
 require_once('controllers/NoticiaController.php');
+require_once('controllers/ComentariosController.php');
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -14,6 +15,7 @@ $urlParts = explode('/', $_GET['action']);
 $Controller = new Controller();
 $UserController = new UserController();
 $NoticiaController = new NoticiaController();
+$CommentController = new CommentController();
 
 switch ($urlParts[0]) {
 	case 'home':
@@ -38,7 +40,8 @@ switch ($urlParts[0]) {
 		$NoticiaController->deleteCategory($urlParts[1]);
 		break;
 	case 'sendcomment':
-		$Comment
+		$CommentController->newComment();
+		break;
 	case 'dpsTierList':
 		$Controller->dpsTierList();
 		break;
