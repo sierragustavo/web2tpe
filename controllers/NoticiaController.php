@@ -3,6 +3,7 @@
 include_once './models/NoticiaModel.php';
 include_once './views/NoticiaView.php';
 include_once './models/CategoryModel.php';
+include_once './models/CommentModel.php';
 
 define('LIMITE_PAGINADOR', 3);
 
@@ -11,12 +12,14 @@ class NoticiaController
     private $modelNoticia;
     private $modelCategory;
     private $view;
+    private $modelComment;
 
     public function __construct()
     {
         $this->modelNoticia = new NoticiaModel();
         $this->modelCategory = new CategoryModel();
         $this->view = new NoticiaView();
+        $this->modelComment = new CommentModel();
     }
 
     public function showNews()

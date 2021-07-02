@@ -29,7 +29,6 @@
                 <label for="score-5">5</label>
                 <button type="submit">Enviar</button>
             </div>
-            <!-- id_new_fk, author_comment, comment, score -->
         </form>
     {else}
         <a>Ingrese como usuario para comentar</a>

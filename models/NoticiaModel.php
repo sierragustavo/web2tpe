@@ -1,9 +1,16 @@
 <?php
 
 require_once('DBModel.php');
+include_once('models/CommentModel.php');
 
 class NoticiaModel extends DBModel
 {
+    private $modelComment;
+
+    function __construct()
+    {
+        $this->modelComment = new CommentModel;
+    }
     function getAll()
     {
         $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category');
