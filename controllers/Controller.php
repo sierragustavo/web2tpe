@@ -18,5 +18,7 @@ class Controller
     {
         $this->view->renderdpsTierList();
     }
-
+    function error404(){
+        $this->view->render404();
+    }
 }

@@ -83,6 +83,6 @@ switch ($urlParts[0]) {
 		$NoticiaController->showNews();
 		break;
 	default:
-		echo '<h1>Error 404 - Page not found </h1>';
+		$Controller->error404();
 		break;
 }

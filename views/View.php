@@ -20,6 +20,10 @@ class View
 
     }
 
+    public function error404(){
+        $this->getSmarty()->display('templates/404.tpl');
+    }
+
     public function getSmarty()
     {
         return $this->smarty;
