@@ -7,4 +7,7 @@ include_once './models/CommentModel.php';
 
 class ComentariosController
 {
+    public function newComment()
+    {
+    }
 }

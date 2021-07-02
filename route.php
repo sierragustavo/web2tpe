@@ -15,7 +15,7 @@ $urlParts = explode('/', $_GET['action']);
 $Controller = new Controller();
 $UserController = new UserController();
 $NoticiaController = new NoticiaController();
-$CommentController = new CommentController();
+$ComentariosController = new ComentariosController();
 
 switch ($urlParts[0]) {
 	case 'home':
@@ -40,7 +40,7 @@ switch ($urlParts[0]) {
 		$NoticiaController->deleteCategory($urlParts[1]);
 		break;
 	case 'sendcomment':
-		$CommentController->newComment();
+		$ComentariosController->newComment();
 		break;
 	case 'dpsTierList':
 		$Controller->dpsTierList();
