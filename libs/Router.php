@@ -17,7 +17,7 @@ class Route
         $this->params = [];
     }
 
-    public function match($url, $verb)
+    public function matchUrls($url, $verb)
     {
         if ($this->verb != $verb) {
             return false;
@@ -63,7 +63,7 @@ class Router
     {
         //$ruta->url //no compila!
         foreach ($this->routeTable as $route) {
-            if ($route->match($url, $verb)) {
+            if ($route->matchUrls($url, $verb)) {
                 //TODO: ejecutar el controller//ejecutar el controller
                 // pasarle los parametros
                 $route->run();

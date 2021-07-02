@@ -37,6 +37,8 @@ switch ($urlParts[0]) {
 	case 'deleteCategory':
 		$NoticiaController->deleteCategory($urlParts[1]);
 		break;
+	case 'sendcomment':
+		$Comment
 	case 'dpsTierList':
 		$Controller->dpsTierList();
 		break;
