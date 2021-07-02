@@ -1,5 +1,5 @@
-{include 'header.tpl'}
+{include 'templates/header.tpl'}
 
 <h1>Error 404: Page Not Found</h1>
 
-{include 'footer.tpl'}
+{include 'templates/footer.tpl'}

@@ -10,24 +10,26 @@
 <div class="comentary-box">
     {if isset($username) && $username}
         <form action="{$base_url}sendcomment" method="POST">
-            <input hidden value="{$new->id_news}" name="id_news">
-            <label for="comentary">Comente la nota</label>
-            <input type="text" name="comentario" placeholder="Comente aquí">
+            <input hidden value="{$new->id_news}" name="id_news_fk">
+            <input hidden value="{$username}" name="author_comment">
+            <label for="comment">Comente la nota</label>
+            <input type="text" name="comment" placeholder="Comente aquí">
             <br>
             <label for="score-box">Deje un puntaje</label>
-            <div class="score-box">
-                <input type="radio" name="score-1" value="1">
+            <div class="score-box" name="score-box">
+                <input type="radio" name="score" value="1">
                 <label for="score-1">1</label>
-                <input type="radio" name="score-2" value="2">
+                <input type="radio" name="score" value="2">
                 <label for="score-2">2</label>
-                <input type="radio" name="score-3" value="3">
+                <input type="radio" name="score" value="3">
                 <label for="score-3">3</label>
-                <input type="radio" name="score-4" value="4">
+                <input type="radio" name="score" value="4">
                 <label for="score-4">4</label>
-                <input type="radio" name="score-5" value="5">
+                <input type="radio" name="score" value="5">
                 <label for="score-5">5</label>
                 <button type="submit">Enviar</button>
             </div>
+            <!-- id_new_fk, author_comment, comment, score -->
         </form>
     {else}
         <a>Ingrese como usuario para comentar</a>
