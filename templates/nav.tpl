@@ -21,7 +21,3 @@
     </a>
     <script src="{$base_url}js/menu.js"></script>
 </div>
-<div class="header-box">
-    <img class="logo" src="{$base_url}img/logo.png">
-    <h1>THE INNKEEPER</h1>
-</div>

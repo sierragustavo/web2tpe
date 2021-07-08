@@ -1,5 +1,10 @@
 {include 'templates/header.tpl'}
 
+<div class="header-box">
+    <img class="logo" src="{$base_url}img/logo.png">
+    <h1>THE INNKEEPER</h1>
+</div>
+
 <div>
     <form method="GET">
         <label for="input-filtrar">Categoria:</label>
@@ -16,19 +21,21 @@
 
 <div class="noticia-container">
     <ul>
-        {foreach from=$news item=noticias}
+        {foreach from=$news item=noticia}
             <li>
-                <h2>Titulo: {$noticias->title}</h2>
-                Autor: {$noticias->author}
+                <h3>Titulo: {$noticia->title}</h3>
+                Autor: {$noticia->author}
                 <br>
-                Categoria: {$noticias->name_category}
+                Categoria: {$noticia->name_category}
                 <br>
-                <small><a href="{$base_url}details/{$noticias->id_news}"> Detalles </a></small>
+                Valoración: <progress max="5" value="{$noticia->promedioscore}"></progress>
                 <br>
-                {if ($noticias->author)=={$username}}
-                    <small><a href="{$base_url}update/{$noticias->id_news}"> Cambiar </a></small>
+                <small><a href="{$base_url}details/{$noticia->id_news}"> Detalles </a></small>
+                <br>
+                {if ($noticia->author)=={$username}}
+                    <small><a href="{$base_url}update/{$noticia->id_news}"> Cambiar </a></small>
                     <br>
-                    <small><a href="{$base_url}delete/{$noticias->id_news}"> Delete </a></small>
+                    <small><a href="{$base_url}delete/{$noticia->id_news}"> Delete </a></small>
                     <br>
                 {/if}
             </li>

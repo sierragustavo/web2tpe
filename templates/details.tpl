@@ -5,13 +5,10 @@
     <a>{$new->details}</a>
     <h3>Autor: {$new->author}</h3>
     <h3>Categoria: {$new->name_category}</h3>
-</div>
+</div
 
 <div class="comments-box">
     <h3>COMENTARIOS</h3>
-    <a>Score promedio: </a>
-    <progress max="5" value="{$new->promedioscore}"></progress>
-    <br>
     {foreach from=$comments item=commentary}
         <div class="comment">
             <a class="author">Autor: {$commentary->author}</a>
@@ -23,7 +20,7 @@
         </div>
     {/foreach}
 </div>
-
+<br>
 <div class="add-commentary-box">
     {if isset($username) && $username}
         <form action="{$base_url}sendcomment" method="POST">

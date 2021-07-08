@@ -6,15 +6,22 @@ class NoticiaModel extends DBModel
 {
     function getAll()
     {
-        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category');
+        $query = $this->getDb()->prepare("SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore 
+        FROM news 
+        INNER JOIN categories ON news.category_pk = categories.id_category 
+        LEFT JOIN comments on news.id_news = comments.id_new_fk 
+        group by news.id_news");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     function get($id)
     {
-        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore FROM news INNER JOIN categories ON news.category_pk = categories.id_category INNER JOIN comments on news.id_news = comments.id_new_fk WHERE id_news = ?');
-        $query->execute(array(($id)));
+        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore 
+        FROM news 
+        INNER JOIN categories ON news.category_pk = categories.id_category 
+        LEFT JOIN comments on news.id_news = comments.id_new_fk where id_news = ?');
+        $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
@@ -35,7 +42,11 @@ class NoticiaModel extends DBModel
 
     function getNewsByCategory($id_news)
     {
-        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category WHERE category_pk=?');
+        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore 
+        FROM news 
+        INNER JOIN categories ON news.category_pk = categories.id_category 
+        LEFT JOIN comments on news.id_news = comments.id_new_fk 
+        group by news.id_news WHERE category_pk=?');
         $query->execute([$id_news]);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
