@@ -66,6 +66,10 @@ switch ($urlParts[0]) {
 	case 'update':
 		$NoticiaController->renderUpdate($urlParts[1]);
 		break;
+	case 'deletecomment':
+		$ComentariosController->deleteComment($urlParts[2]);
+		$NoticiaController->detalleNoticia($urlParts[1]);
+		break;
 	case 'form_news':
 		$NoticiaController->renderFormNews();
 		break;

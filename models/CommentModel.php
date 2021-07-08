@@ -19,11 +19,18 @@ class CommentModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
+    public function getAllComments($id){
+        $query = $this->getDb()->prepare('SELECT * from comments WHERE id_new_fk=?');
+        $query->execute([$id]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function getPromedioScores($id)
     {
+        /* esto fue hasta que descubrí AVG() en sql
         $suma = 0;
         $cantidad = 0;
-        $query = $this->getDb()->prepare('SELECT score from comments WHERE id_comment=?');
+        $query = $this->getDb()->prepare('SELECT score from comments WHERE id_new_fk=?');
         $query->execute([$id]);
         $arrayScores = $query->fetchAll(PDO::FETCH_OBJ);
         foreach ($arrayScores as $score) {
@@ -35,5 +42,7 @@ class CommentModel extends DBModel
             return $promedio;
         } else
             return 0;
+            */
+        
     }
 }

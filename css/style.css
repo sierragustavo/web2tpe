@@ -614,3 +614,10 @@ tr:nth-child(even) {
 .registro a:hover {
     color: rgba(14, 99, 102, 0.534);
 }
+
+progress {
+    text-align: center;
+  }
+  progress:after {
+    content: attr(value)'%';
+  }

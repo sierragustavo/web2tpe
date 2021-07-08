@@ -1,16 +1,9 @@
 <?php
 
 require_once('DBModel.php');
-include_once('models/CommentModel.php');
 
 class NoticiaModel extends DBModel
 {
-    private $modelComment;
-
-    function __construct()
-    {
-        $this->modelComment = new CommentModel;
-    }
     function getAll()
     {
         $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category');
@@ -20,7 +13,7 @@ class NoticiaModel extends DBModel
 
     function get($id)
     {
-        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category FROM news INNER JOIN categories ON news.category_pk = categories.id_category WHERE id_news = ?');
+        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore FROM news INNER JOIN categories ON news.category_pk = categories.id_category INNER JOIN comments on news.id_news = comments.id_new_fk WHERE id_news = ?');
         $query->execute(array(($id)));
         return $query->fetch(PDO::FETCH_OBJ);
     }

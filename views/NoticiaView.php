@@ -36,9 +36,10 @@ class NoticiaView extends View
         $this->getSmarty()->assign('categories', $categories);
         $this->getSmarty()->display('templates/update.tpl');
     }
-    function renderDetails($new)
+    function renderDetails($new,$comments)
     {
         $this->getSmarty()->assign('new', $new);
+        $this->getSmarty()->assign('comments',$comments);
         $this->getSmarty()->display('templates/details.tpl');
     }
     function renderFormnews($categories)

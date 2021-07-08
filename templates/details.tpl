@@ -7,7 +7,24 @@
     <h3>Categoria: {$new->name_category}</h3>
 </div>
 
-<div class="comentary-box">
+<div class="comments-box">
+    <h3>COMENTARIOS</h3>
+    <a>Score promedio: </a>
+    <progress max="5" value="{$new->promedioscore}"></progress>
+    <br>
+    {foreach from=$comments item=commentary}
+        <div class="comment">
+            <a class="author">Autor: {$commentary->author}</a>
+            <a>Comentario: {$commentary->comment}</a>
+            <a>Valoración: {$commentary->score}</a>
+            {if $is_admin == 1}
+                <button><a href="{$base_url}deletecomment/{$new->id_news}/{$commentary->id_comment}"> Borrar </a></button>
+            {/if}
+        </div>
+    {/foreach}
+</div>
+
+<div class="add-commentary-box">
     {if isset($username) && $username}
         <form action="{$base_url}sendcomment" method="POST">
             <input hidden value="{$new->id_news}" name="id_news_fk">

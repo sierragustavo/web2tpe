@@ -106,6 +106,7 @@ class NoticiaController
     public function detalleNoticia($id)
     {
         $query = $this->modelNoticia->get($id);
-        $this->view->renderDetails($query);
+        $comentarios = $this->modelComment->getAllComments($id);
+        $this->view->renderDetails($query,$comentarios);
     }
 }
