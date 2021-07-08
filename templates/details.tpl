@@ -5,20 +5,26 @@
     <a>{$new->details}</a>
     <h3>Autor: {$new->author}</h3>
     <h3>Categoria: {$new->name_category}</h3>
-</div
+</div>
+
 
 <div class="comments-box">
-    <h3>COMENTARIOS</h3>
-    {foreach from=$comments item=commentary}
-        <div class="comment">
-            <a class="author">Autor: {$commentary->author}</a>
-            <a>Comentario: {$commentary->comment}</a>
-            <a>Valoración: {$commentary->score}</a>
-            {if $is_admin == 1}
-                <button><a href="{$base_url}deletecomment/{$new->id_news}/{$commentary->id_comment}"> Borrar </a></button>
-            {/if}
-        </div>
-    {/foreach}
+    {if ($new->promedioscore)!=null}
+        <h3>COMENTARIOS</h3>
+        {foreach from=$comments item=commentary}
+            <div class="comment">
+                <a class="author">Autor: {$commentary->author}</a>
+                <a>Comentario: {$commentary->comment}</a>
+                <a>Valoración: {$commentary->score}</a>
+                {if $is_admin == 1}
+                    <button><a href="{$base_url}deletecomment/{$new->id_news}/{$commentary->id_comment}"> Borrar </a></button>
+                {/if}
+            </div>
+        {/foreach}
+    {else}
+        <h3>Esta noticia no tiene comentarios, Soyez le premier!</h3>
+    {/if}
+
 </div>
 <br>
 <div class="add-commentary-box">

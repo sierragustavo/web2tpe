@@ -28,7 +28,11 @@
                 <br>
                 Categoria: {$noticia->name_category}
                 <br>
-                Valoración: <progress max="5" value="{$noticia->promedioscore}"></progress>
+                {if ($noticia->promedioscore)!=null}
+                    Valoración: <progress max="5" value="{$noticia->promedioscore}"></progress>
+                {else}
+                    0 comentarios
+                {/if}
                 <br>
                 <small><a href="{$base_url}details/{$noticia->id_news}"> Detalles </a></small>
                 <br>

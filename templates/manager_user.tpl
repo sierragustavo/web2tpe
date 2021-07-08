@@ -34,5 +34,6 @@
                         <a>Necesita ser administrador del sitio para ver esto</a>
                     {/if}
                 </th>
-            {/foreach}
-            {include 'templates/footer.tpl'}
+            </tr>
+        {/foreach}
+        {include 'templates/footer.tpl'}

@@ -42,11 +42,13 @@ class NoticiaModel extends DBModel
 
     function getNewsByCategory($id_news)
     {
-        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore 
-        FROM news 
-        INNER JOIN categories ON news.category_pk = categories.id_category 
-        LEFT JOIN comments on news.id_news = comments.id_new_fk 
-        group by news.id_news WHERE category_pk=?');
+        $query = $this->getDb()->prepare(
+            'SELECT news.title,news.details,news.author,news.id_news,categories.name_category, avg(comments.score) as promedioscore 
+            FROM news 
+            INNER JOIN categories ON news.category_pk = categories.id_category 
+            LEFT JOIN comments on news.id_news = comments.id_new_fk
+            WHERE category_pk=? group by news.id_news'
+        );
         $query->execute([$id_news]);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
