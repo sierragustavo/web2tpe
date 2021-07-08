@@ -91,7 +91,12 @@ class UserController
     }
     function disableAdmin($id)
     {
-        $this->model->disableAdmin($id);
-        $this->showUserList();
+        $loggedUser = AuthHelper::getLoggedUserName();
+        
+        print_r('distinto');
+        //$this->model->disableAdmin($id);
+
+        print_r('igual');
+        //$this->showUserList();
     }
 }
