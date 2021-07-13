@@ -26,10 +26,8 @@ class NewsApiController
 
     public function getNews($params = [])
     {
-        // obtengo las tareas
         $news = $this->modelNoticia->getAll();
 
-        // se las paso a la vista para que responda JSON
         $this->view->response($news, 200);
     }
 
@@ -41,7 +39,6 @@ class NewsApiController
 
     public function getNewsById($params = [])
     {
-        // obtengo las tareas
         $idNews = $params[':ID'];
 
         $news = $this->modelNoticia->get($idNews);
@@ -50,8 +47,6 @@ class NewsApiController
         } else {
             $this->view->response("No se encontro el id $idNews", 400);
         }
-        // se las paso a la vista para que responda JSON
-
     }
     public function uploadImage($params = [])
     {

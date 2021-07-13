@@ -10,7 +10,7 @@
 
 <div class="comments-box">
     {if ($new->promedioscore)!=null}
-        <h3>COMENTARIOS</h3>
+        {include file="vue/comments.vue"}
         {foreach from=$comments item=commentary}
             <div class="comment">
                 <a class="author">Autor: {$commentary->author}</a>
@@ -24,6 +24,7 @@
     {else}
         <h3>Esta noticia no tiene comentarios, Soyez le premier!</h3>
     {/if}
+
 
 </div>
 <br>
@@ -66,5 +67,5 @@
 <br>
 <small><a href="#"> Volver </a></small>
 </div>
-
+<script src="{$base_url}js/api-vue.js"></script>
 {include 'templates/footer.tpl'}
