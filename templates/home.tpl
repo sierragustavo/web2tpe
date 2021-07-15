@@ -41,7 +41,7 @@
                 <br>
                 <small><a href="{$base_url}details/{$noticia->id_news}"> Detalles </a></small>
                 <br>
-                {if ($noticia->author)=={$username}}
+                {if $is_admin == 1}
                     <small><a href="{$base_url}update/{$noticia->id_news}"> Cambiar </a></small>
                     <br>
                     <small><a href="{$base_url}delete/{$noticia->id_news}"> Delete </a></small>
