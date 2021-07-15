@@ -40,7 +40,7 @@ class NoticiaModel extends DBModel
         return $target;
     }
 
-    function getNewsByCategory($id_news)
+    function getNewsByCategory($id_category)
     {
         $query = $this->getDb()->prepare(
             'SELECT news.title,news.details,news.author,news.id_news,categories.name_category, avg(comments.score) as promedioscore 
@@ -49,7 +49,33 @@ class NoticiaModel extends DBModel
             LEFT JOIN comments on news.id_news = comments.id_new_fk
             WHERE category_pk=? group by news.id_news'
         );
-        $query->execute([$id_news]);
+        $query->execute([$id_category]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getNewsByCategoryAndAuthor($id_category, $authorFilter)
+    {
+        $query = $this->getDb()->prepare(
+            'SELECT news.title,news.details,news.author,news.id_news,categories.name_category, avg(comments.score) as promedioscore 
+            FROM news 
+            INNER JOIN categories ON news.category_pk = categories.id_category 
+            LEFT JOIN comments on news.id_news = comments.id_new_fk
+            WHERE category_pk=? AND news.author=? group by news.id_news'
+        );
+        $query->execute([$id_category, $authorFilter]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getNewsByAuthor($authorFilter)
+    {
+        $query = $this->getDb()->prepare(
+            'SELECT news.title,news.details,news.author,news.id_news,categories.name_category, avg(comments.score) as promedioscore 
+            FROM news 
+            INNER JOIN categories ON news.category_pk = categories.id_category 
+            LEFT JOIN comments on news.id_news = comments.id_new_fk
+            WHERE news.author=? group by news.id_news'
+        );
+        $query->execute([$authorFilter]);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
     function delete($id)

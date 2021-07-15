@@ -12,7 +12,7 @@ class NoticiaView extends View
         $this->getSmarty()->assign('username', $username);
     }
 
-    function showAllNews($news, $categories, $paginaActual, $cantidadPaginas, $filtrando, $id_category = null)
+    function showAllNews($news, $categories, $paginaActual, $cantidadPaginas, $filtrando, $id_category = null, $author_filter = null)
     {
         $this->getSmarty()->assign('news', $news);
         $this->getSmarty()->assign('categories', $categories);
@@ -20,6 +20,7 @@ class NoticiaView extends View
         $this->getSmarty()->assign('cantidadPaginas', $cantidadPaginas);
         $this->getSmarty()->assign('filtrando', $filtrando); //si tiene el parametro ?filtro, viene true
         $this->getSmarty()->assign('id_category', $id_category); //si tiene el parametro ?filtro, viene true
+        $this->getSmarty()->assign('author_filter', $author_filter); //si tiene el parametro ?filtro, viene true
         $this->getSmarty()->display('templates/home.tpl'); // muestro el template   
     }
 
@@ -36,10 +37,10 @@ class NoticiaView extends View
         $this->getSmarty()->assign('categories', $categories);
         $this->getSmarty()->display('templates/update.tpl');
     }
-    function renderDetails($new,$comments)
+    function renderDetails($new, $comments)
     {
         $this->getSmarty()->assign('new', $new);
-        $this->getSmarty()->assign('comments',$comments);
+        $this->getSmarty()->assign('comments', $comments);
         $this->getSmarty()->display('templates/details.tpl');
     }
     function renderFormnews($categories)

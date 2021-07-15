@@ -9,7 +9,8 @@ class CommentModel extends DBModel
     {
         $query = $this->getDb()->prepare('INSERT INTO comments (id_new_fk, author, comment, score) VALUES (?,?,?,?)');
         $query->execute([$id, $author, $comment, $score]);
-        return $query->lastInsertId();;
+        $lastId = $this->getDb()->lastInsertId();
+        return $lastId;
     }
 
     public function deleteComment($id)

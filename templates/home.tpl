@@ -7,13 +7,18 @@
 
 <div>
     <form method="GET">
-        <label for="input-filtrar">Categoria:</label>
-        <select name="filtrar" id="input-filtrar" class="category-select">
+        <label for="filtrar-categoria">Categoria:</label>
+        <select name="categoria" id="filtrar-categoria" class="category-select">
+
+            <option value="all" {if $filtrando==false}selected {/if}>Todas</option>
+
             {foreach from=$categories item=category}
-                <option {if $filtrando==true} {if $category->id_category == {$id_category}} selected {/if} {/if}
+                <option {if $filtrando==true}{if $category->id_category == $id_category} selected {/if} {/if}
                     value={$category->id_category}>{$category->name_category}</option>
             {/foreach}
         </select>
+        <label for="filtrar-autor">Autor:</label>
+        <input type="text" name="autor">
         <button type="submit">FILTRAR</button>
     </form>
 </div>

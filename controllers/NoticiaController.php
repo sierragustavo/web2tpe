@@ -25,23 +25,32 @@ class NoticiaController
     public function showNews()
     {
         $categories = $this->modelCategory->getCategories();
+        if (isset($_GET['autor'])) {
+            $authorFilter = $_GET['autor'];
+        } else
+            $authorFilter = '';
         if (isset($_GET['pagina']))
             $paginaActual = $_GET['pagina'];
         else
             $paginaActual = 1;
-        if (isset($_GET['filtrar'])) {
-            $id_category = $_GET['filtrar'];
-            $news = $this->modelNoticia->getNewsByCategory($id_category);
+        if (isset($_GET['categoria'])) {
+            $id_category = $_GET['categoria'];
+            if ($authorFilter == '')
+                $news = $this->modelNoticia->getNewsByCategory($id_category);
+            elseif (($authorFilter != '') && ($id_category != 'all'))
+                $news = $this->modelNoticia->getNewsByCategoryAndAuthor($id_category, $authorFilter);
+            elseif (($authorFilter != '') && ($id_category == 'all'))
+                $news = $this->modelNoticia->getNewsByAuthor($authorFilter);
             $filtrando = true;
         } else {
-            $news = $this->modelNoticia->getAll(); //ACA SE HACE UNA ARRAY CON TODAS LAS NEWS DE LA DB
+            $news = $this->modelNoticia->getAll();
             $filtrando = false;
             $id_category = 0; //para que funcione
         }
         $newsAlt = $news;
         $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
         $cantidadPaginas = count($newsAlt) / LIMITE_PAGINADOR;
-        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas, $filtrando, $id_category);
+        $this->view->showAllNews($news, $categories, $paginaActual, $cantidadPaginas, $filtrando, $id_category, $authorFilter);
     }
 
     public function showManage() //PAGINA CATEGORIAS
@@ -107,6 +116,6 @@ class NoticiaController
     {
         $query = $this->modelNoticia->get($id);
         $comentarios = $this->modelComment->getAllComments($id);
-        $this->view->renderDetails($query,$comentarios);
+        $this->view->renderDetails($query, $comentarios);
     }
 }
