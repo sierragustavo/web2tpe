@@ -19,7 +19,6 @@ class ComentariosController
     public function newComment()
     {
         // <!-- id_new_fk, author_comment, comment, score -->
-
         $id_news = $_POST['id_news_fk'];
         $author = $_POST['author_comment'];
         $comment = $_POST['comment'];

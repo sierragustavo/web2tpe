@@ -15,6 +15,8 @@ $router->addRoute('uploadimage', 'POST', 'NewsApiController', 'uploadImage');
 
 $router->addRoute('comments/:ID', 'GET', 'CommentsApiController', 'getCommentsByNewsID');
 $router->addRoute('comments', 'GET', 'CommentsApiController', 'getAllComments');
+$router->addRoute('addcomment', 'POST', 'CommentsApiController', 'addComment');
+$router->addRoute('deletecomment/:ID','GET','CommentsApiController','deleteCommentByID');
 
 // rutea
 $router->route($_REQUEST['resource'], $_SERVER['REQUEST_METHOD']);

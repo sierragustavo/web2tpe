@@ -2,7 +2,7 @@
 require_once 'api.view.php';
 require_once './models/CommentModel.php';
 
-class CommentsApiController extends APIView
+class CommentsApiController
 {
 
     private $modelComments;
@@ -25,10 +25,23 @@ class CommentsApiController extends APIView
     {
         $idNews = $params[':ID'];
         $comentarios = $this->modelComments->getAllComments($idNews);
-        if ($comentarios) {
-            $this->view->response($comentarios, 200);
-        } else {
-            $this->view->response("No se encontro el id $idNews", 400);
-        }
+        $this->view->response($comentarios, 200);
+    }
+
+    public function deleteCommentByID($params = [])
+    {
+        $idComment = $params[':ID'];
+        $query = $this->modelComments->deleteComment($idComment);
+        $this->view->response($query, 200);
+    }
+
+    public function addComment($params = [])
+    {
+        $body = $this->getData();
+        $comentario = $this->modelComments->newComment($body->id_new_fk, $body->author, $body->comment, $body->score);
+        if (!empty($comentario))
+            $this->view->response($comentario, 200);
+        else
+            $this->view->response("El comentario no se pudo agregar", 404);
     }
 }
