@@ -59,15 +59,17 @@ function addComentario() {
 }
 
 function checkScore() {
-  if (document.querySelector("#score1").checked == true) return 0;
-  if (document.querySelector("#score2").checked == true) return 1;
-  if (document.querySelector("#score3").checked == true) return 2;
-  if (document.querySelector("#score4").checked == true) return 3;
-  if (document.querySelector("#score5").checked == true) return 4;
+  if (document.querySelector("#score0").checked == true) return 0;
+  if (document.querySelector("#score1").checked == true) return 1;
+  if (document.querySelector("#score2").checked == true) return 2;
+  if (document.querySelector("#score3").checked == true) return 3;
+  if (document.querySelector("#score4").checked == true) return 4;
+  if (document.querySelector("#score5").checked == true) return 5;
 }
 
 function clearInputs() {
   document.querySelector("#comment").value = "";
+  document.querySelector("#score0").checked = false;
   document.querySelector("#score1").checked = false;
   document.querySelector("#score2").checked = false;
   document.querySelector("#score3").checked = false;

@@ -28,14 +28,16 @@
         <br>
         <label for="score-box">Deje un puntaje</label>
         <div class="score-box" name="score">
+            <input type="radio" name="score" value="0" id="score0">
+            <label for="score-1">0</label>
             <input type="radio" name="score" value="1" id="score1">
-            <label for="score-1">1</label>
+            <label for="score-2">1</label>
             <input type="radio" name="score" value="2" id="score2">
-            <label for="score-2">2</label>
+            <label for="score-3">2</label>
             <input type="radio" name="score" value="3" id="score3">
-            <label for="score-3">3</label>
+            <label for="score-4">3</label>
             <input type="radio" name="score" value="4" id="score4">
-            <label for="score-4">4</label>
+            <label for="score-5">4</label>
             <input type="radio" name="score" value="5" id="score5">
             <label for="score-5">5</label>
         </div>
