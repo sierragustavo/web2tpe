@@ -54,7 +54,7 @@
     </div>
 
     {include 'templates/paginador.tpl'}
-{else}
+    {else}
     <a>No hay articulos!</a>
-{/if}
+    {/if}
 {include 'templates/footer.tpl'}
