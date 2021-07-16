@@ -6,7 +6,7 @@ class NoticiaModel extends DBModel
 {
     function getAll()
     {
-        $query = $this->getDb()->prepare("SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore 
+        $query = $this->getDb()->prepare("SELECT news.title,news.details,news.author,news.id_news,news.image,categories.name_category,AVG(comments.score) as promedioscore 
         FROM news 
         INNER JOIN categories ON news.category_pk = categories.id_category 
         LEFT JOIN comments on news.id_news = comments.id_new_fk 
@@ -17,7 +17,7 @@ class NoticiaModel extends DBModel
 
     function get($id)
     {
-        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,categories.name_category,AVG(comments.score) as promedioscore 
+        $query = $this->getDb()->prepare('SELECT news.title,news.details,news.author,news.id_news,news.image,categories.name_category,AVG(comments.score) as promedioscore 
         FROM news 
         INNER JOIN categories ON news.category_pk = categories.id_category 
         LEFT JOIN comments on news.id_news = comments.id_new_fk where id_news = ?');
@@ -27,17 +27,18 @@ class NoticiaModel extends DBModel
 
     function new($title, $details, $categoryID, $author)
     {
-        $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,seen)VALUES (?,?,?,?,false)');
+        $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author)VALUES (?,?,?,?)');
         $query->execute([$title, $details, $categoryID, $author]);
         $lastId = $this->getDb()->lastInsertId();
         return $lastId;
     }
 
-    function uploadImage($image)
+    function newConImagen($title, $details, $categoryID, $author, $destino)
     {
-        $target = 'uploads/images/' . uniqid() . 'jpg';
-        move_uploaded_file($image, $target);
-        return $target;
+        $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,image)VALUES (?,?,?,?,?)');
+        $query->execute([$title, $details, $categoryID, $author, $destino]);
+        $lastId = $this->getDb()->lastInsertId();
+        return $lastId;
     }
 
     function getNewsByCategory($id_category)
@@ -85,10 +86,17 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function update($id)
+    function updateNewsConImagen($id_news, $title, $details, $categoryID, $author, $destino)
     {
-        $query = $this->getDb()->prepare('UPDATE news SET seen = true WHERE id_news = ?');
-        $query->execute([$id]);
+        $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, author = ?, category_pk = ?, image = ? WHERE id_news = ?');
+        $query->execute([$title, $details, $author, $categoryID,  $destino, $id_news]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function updateNews($id_news, $title, $details, $categoryID, $author)
+    {
+        $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, category_pk = ?, author = ? WHERE id_news = ?');
+        $query->execute([$title, $details, $categoryID, $author, $id_news]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 }

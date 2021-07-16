@@ -66,7 +66,17 @@ class NoticiaController
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
         $author = AuthHelper::getLoggedUserName();
-        $this->modelNoticia->new($title, $details, $categoryID, $author);
+        if (isset($_FILES['imagen']) && AuthHelper::getUserStatus()) {
+            $nameImage = $_FILES['imagen']['name'];
+            $tempImagePath = $_FILES['imagen']['tmp_name'];
+            $ext = pathinfo($nameImage, PATHINFO_EXTENSION);
+            $hashed = md5(time() . $nameImage) . '.' . $ext;
+            $path = 'img/';
+            $destino = $path . $hashed;
+            move_uploaded_file($tempImagePath, $destino);
+            $this->modelNoticia->newConImagen($title, $details, $categoryID, $author, $destino);
+        } else
+            $this->modelNoticia->new($title, $details, $categoryID, $author);
         header("Location:" . BASE_URL . 'home');
     }
 
@@ -106,9 +116,25 @@ class NoticiaController
         $this->view->renderFormNews($categories);
     }
 
-    public function updateNoticia($id, $title, $details, $categoryID) //ACTUALIZAR CATEGORIA
+    public function updateNews() //ACTUALIZAR CATEGORIA
     {
-        $this->modelNoticia->update($id, $title, $details, $categoryID);
+        AuthHelper::checkLoggedIn();
+        $title = $_POST['title'];
+        $details = $_POST['details'];
+        $categoryID = $_POST['category'];
+        $id_news = $_POST['id_news'];
+        $author = AuthHelper::getLoggedUserName();
+        //if (isset($_FILES['imagen']) && AuthHelper::getUserStatus()) {
+        $nameImage = $_FILES['imagen']['name'];
+        $tempImagePath = $_FILES['imagen']['tmp_name'];
+        $ext = pathinfo($nameImage, PATHINFO_EXTENSION);
+        $hashed = md5(time() . $nameImage) . '.' . $ext;
+        $path = 'img/';
+        $destino = $path . $hashed;
+        move_uploaded_file($tempImagePath, $destino);
+        $this->modelNoticia->updateNewsConImagen($id_news, $title, $details, $categoryID, $author, $destino);
+        /*} else
+        $this->modelNoticia->updateNews($id_news, $title, $details, $categoryID, $author);*/
         header("Location:" . BASE_URL . 'home');
     }
 

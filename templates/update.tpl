@@ -2,11 +2,12 @@
 
 <div class="content">
     <div class="update-form-left">
-        <form action="updateForm" method="POST">
+        <form action="updateForm" method="POST" enctype="multipart/form-data">
+            <input hidden value="{$new->id_news}" name="id_news" id="id_news">
             <label>Titulo</label>
-            <input type="text" name="title" placeholder="{$new->title}">
+            <input type="text" name="title" value="{$new->title}">
             <label>Detalles</label>
-            <textarea class="message-form" name="details" placeholder="{$new->details}"></textarea>
+            <textarea class="message-form" name="details" placeholder="{$new->details}" rows="10" cols="50"></textarea>
             <label>Categoría</label>
             <select name="category">
                 {foreach from=$categories item=category}
@@ -14,16 +15,9 @@
                 {/foreach}
             </select>
             <button type="submit">Enviar</button>
+            <label for="imagen">Subir imagen</label>
+            <input type="file" name="imagen" id="imagen">
+            <button type="submit">Cargar</button>
         </form>
     </div>
-    <div class="update-form-right">
-        <form action="addimage" method="POST">
-
-            <label for="imageUpload">Subir imagen</label>
-            <input type="file" name="image_name" id="imageUpload" accept=".jpg,.png,.jpeg">
-            <small>solo jpg, jpeg o png</small>
-            <button type="submit">Cargar</button> 
-        </form>
-    </div>
-</div>
-{include 'templates/footer.tpl'}
+    {include 'templates/footer.tpl'}

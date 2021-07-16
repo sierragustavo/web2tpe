@@ -48,12 +48,7 @@ class NewsApiController
             $this->view->response("No se encontro el id $idNews", 400);
         }
     }
-    public function uploadImage($params = [])
-    {
-        $image = $_FILES['image'];
-        $this->modelNoticia->uploadImage($image);
-        $this->view->response('La imagen fue cargada en: ' . $image, 200);
-    }
+
 
     public function addNews($params = [])
     {

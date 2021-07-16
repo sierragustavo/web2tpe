@@ -5,6 +5,7 @@
     <a>{$new->details}</a>
     <h3>Autor: {$new->author}</h3>
     <h3>Categoria: {$new->name_category}</h3>
+    <img class="img-details" src="{$base_url}{$new->image}" size>
 </div>
 
 
@@ -37,7 +38,6 @@
             <label for="score-5">5</label>
         </div>
         <button id="botonComentario">Enviar</button>
-
     {else}
         <a>Ingrese como usuario para comentar</a>
     {/if}
