@@ -27,8 +27,6 @@
 <div class="noticia-container">
     <ul>
         {if $news!=null}
-            <span>asd</span>
-
             {foreach from=$news item=noticia}
                 <li>
                     <h3>Titulo: {$noticia->title}</h3>

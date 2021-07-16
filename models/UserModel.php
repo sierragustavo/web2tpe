@@ -29,8 +29,8 @@ class UserModel extends DBModel
         $query = $this->getDb()->prepare('SELECT email FROM `user`');
         $query->execute();
         $resultado = $query->fetchAll(PDO::FETCH_COLUMN);
-        foreach ($resultado as $asd)
-            if ($email === $asd)
+        foreach ($resultado as $r)
+            if ($r === $email)
                 return true;
         return false;
     }
