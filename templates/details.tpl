@@ -5,7 +5,9 @@
     <a>{$new->details}</a>
     <h3>Autor: {$new->author}</h3>
     <h3>Categoria: {$new->name_category}</h3>
-    <img class="img-details" src="{$base_url}{$new->image}" size>
+    {if ($new->image)}
+        <img class="img-details" src="{$base_url}{$new->image}" size>
+    {/if}
 </div>
 
 

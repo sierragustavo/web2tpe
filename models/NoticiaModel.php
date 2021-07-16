@@ -25,15 +25,7 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function new($title, $details, $categoryID, $author)
-    {
-        $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author)VALUES (?,?,?,?)');
-        $query->execute([$title, $details, $categoryID, $author]);
-        $lastId = $this->getDb()->lastInsertId();
-        return $lastId;
-    }
-
-    function newConImagen($title, $details, $categoryID, $author, $destino)
+    function new($title, $details, $categoryID, $author, $destino)
     {
         $query = $this->getDb()->prepare('INSERT INTO news (title,details,category_pk,author,image)VALUES (?,?,?,?,?)');
         $query->execute([$title, $details, $categoryID, $author, $destino]);
@@ -86,17 +78,10 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function updateNewsConImagen($id_news, $title, $details, $categoryID, $destino)
+    function updateNews($id_news, $title, $details, $categoryID, $destino)
     {
         $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, category_pk = ?, image = ? WHERE id_news = ?');
-        $query->execute([$title, $details, $categoryID,  $destino, $id_news]);
-        return $query->fetch(PDO::FETCH_OBJ);
-    }
-
-    function updateNews($id_news, $title, $details, $categoryID, $author)
-    {
-        $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, category_pk = ? WHERE id_news = ?');
-        $query->execute([$title, $details, $categoryID, $id_news]);
+        $query->execute([$title, $details, $categoryID, $destino, $id_news]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 }

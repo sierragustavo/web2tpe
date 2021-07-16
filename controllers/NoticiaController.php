@@ -66,7 +66,7 @@ class NoticiaController
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
         $author = AuthHelper::getLoggedUserName();
-        if (isset($_FILES['imagen']) && AuthHelper::getUserStatus()) {
+        if (isset($_FILES['imagen']) && ($_FILES['imagen']['size'] > 1) && AuthHelper::getUserStatus()) {
             $nameImage = $_FILES['imagen']['name'];
             $tempImagePath = $_FILES['imagen']['tmp_name'];
             $ext = pathinfo($nameImage, PATHINFO_EXTENSION);
@@ -74,20 +74,20 @@ class NoticiaController
             $path = 'img/';
             $destino = $path . $hashed;
             move_uploaded_file($tempImagePath, $destino);
-            $this->modelNoticia->newConImagen($title, $details, $categoryID, $author, $destino);
         } else
-            $this->modelNoticia->new($title, $details, $categoryID, $author);
+            $destino = '';
+        $this->modelNoticia->new($title, $details, $categoryID, $author, $destino);
         header("Location:" . BASE_URL . 'home');
     }
 
-    public function deleteNews($id)  //DELETE NEWS
+    public function deleteNews($id)
     {
         if (AuthHelper::checkLoggedIn())
             $this->modelNoticia->delete($id);
         header("Location:" . BASE_URL . 'home');
     }
 
-    public function addCategory() //ADD
+    public function addCategory()
     {
         AuthHelper::getUserStatus();
         $name_category = $_POST['name_category'];
@@ -95,7 +95,7 @@ class NoticiaController
         header("Location:" . BASE_URL . 'manager_categories');
     }
 
-    public function deleteCategory($id) //BORRAR CATEGORIA
+    public function deleteCategory($id)
     {
         if (AuthHelper::checkLoggedIn())
             $this->modelCategory->deleteCategory($id);
@@ -116,24 +116,25 @@ class NoticiaController
         $this->view->renderFormNews($categories);
     }
 
-    public function updateNews() //ACTUALIZAR CATEGORIA
+    public function updateNews()
     {
         AuthHelper::checkLoggedIn();
         $title = $_POST['title'];
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
         $id_news = $_POST['id_news'];
-        //if (isset($_FILES['imagen']) && AuthHelper::getUserStatus()) {
-        $nameImage = $_FILES['imagen']['name'];
-        $tempImagePath = $_FILES['imagen']['tmp_name'];
-        $ext = pathinfo($nameImage, PATHINFO_EXTENSION);
-        $hashed = md5(time() . $nameImage) . '.' . $ext;
-        $path = 'img/';
-        $destino = $path . $hashed;
-        move_uploaded_file($tempImagePath, $destino);
-        $this->modelNoticia->updateNewsConImagen($id_news, $title, $details, $categoryID, $destino);
-        /*} else
-        $this->modelNoticia->updateNews($id_news, $title, $details, $categoryID, $author);*/
+        if (isset($_FILES['imagen']) && ($_FILES['imagen']['size'] > 1) && AuthHelper::getUserStatus()) {
+            $nameImage = $_FILES['imagen']['name'];
+            $tempImagePath = $_FILES['imagen']['tmp_name'];
+            $ext = pathinfo($nameImage, PATHINFO_EXTENSION);
+            $hashed = md5(time() . $nameImage) . '.' . $ext;
+            $path = 'img/';
+            $destino = $path . $hashed;
+            move_uploaded_file($tempImagePath, $destino);
+        } else
+            $destino = '';
+
+        $this->modelNoticia->updateNews($id_news, $title, $details, $categoryID, $destino);
         header("Location:" . BASE_URL . 'home');
     }
 

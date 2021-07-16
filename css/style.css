@@ -538,11 +538,10 @@ tr:nth-child(even) {
   padding: 70px 30px;
 }
 .logo-registro {
-  width: 35%;
   height: 55%;
   position: absolute;
   top: -180px;
-  left: calc(50% - 90px);
+  left: calc(50% - 140px);
 }
 
 .registro form {

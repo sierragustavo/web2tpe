@@ -73,7 +73,9 @@ class UserController
             die();
         }
         $this->model->add($user, $pass, $email);
-        $this->view->renderLogin("Mail registrado correctamente");
+        $userCheck = $this->model->obtenerUserByUsername($user);
+        AuthHelper::login($userCheck);
+        header("Location:" . BASE_URL . 'home');
     }
 
     function deleteUser($id)

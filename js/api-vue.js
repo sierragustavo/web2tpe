@@ -12,11 +12,13 @@ let app = new Vue({
     getComments: function () {
       getComments();
     },
-
+    addComentario: function () {
+      addComentario();
+    },
     deleteComment(id_comentario) {
       fetch(urlA + "api/deletecomment/" + id_comentario)
-      .then(getComments())
-      .catch((error) => console.log(error));
+        .then(getComments())
+        .catch((error) => console.log(error));
     },
   },
 });
@@ -52,14 +54,24 @@ function addComentario() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dataComment),
   })
-    .then(getComments())
+    .then(clearInputs())
     .catch((error) => console.log(error));
 }
 
 function checkScore() {
-  if (document.querySelector("#score1").checked == true) return 1;
-  if (document.querySelector("#score2").checked == true) return 2;
-  if (document.querySelector("#score3").checked == true) return 3;
-  if (document.querySelector("#score4").checked == true) return 4;
-  if (document.querySelector("#score5").checked == true) return 5;
+  if (document.querySelector("#score1").checked == true) return 0;
+  if (document.querySelector("#score2").checked == true) return 1;
+  if (document.querySelector("#score3").checked == true) return 2;
+  if (document.querySelector("#score4").checked == true) return 3;
+  if (document.querySelector("#score5").checked == true) return 4;
+}
+
+function clearInputs() {
+  document.querySelector("#comment").value = "";
+  document.querySelector("#score1").checked = false;
+  document.querySelector("#score2").checked = false;
+  document.querySelector("#score3").checked = false;
+  document.querySelector("#score4").checked = false;
+  document.querySelector("#score5").checked = false;
+  app.getComments();
 }
