@@ -123,7 +123,6 @@ class NoticiaController
         $details = $_POST['details'];
         $categoryID = $_POST['category'];
         $id_news = $_POST['id_news'];
-        $author = AuthHelper::getLoggedUserName();
         //if (isset($_FILES['imagen']) && AuthHelper::getUserStatus()) {
         $nameImage = $_FILES['imagen']['name'];
         $tempImagePath = $_FILES['imagen']['tmp_name'];
@@ -132,7 +131,7 @@ class NoticiaController
         $path = 'img/';
         $destino = $path . $hashed;
         move_uploaded_file($tempImagePath, $destino);
-        $this->modelNoticia->updateNewsConImagen($id_news, $title, $details, $categoryID, $author, $destino);
+        $this->modelNoticia->updateNewsConImagen($id_news, $title, $details, $categoryID, $destino);
         /*} else
         $this->modelNoticia->updateNews($id_news, $title, $details, $categoryID, $author);*/
         header("Location:" . BASE_URL . 'home');

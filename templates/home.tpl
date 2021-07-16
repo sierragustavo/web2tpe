@@ -26,32 +26,37 @@
 
 <div class="noticia-container">
     <ul>
-        {foreach from=$news item=noticia}
-            <li>
-                <h3>Titulo: {$noticia->title}</h3>
-                Autor: {$noticia->author}
-                <br>
-                Categoria: {$noticia->name_category}
-                <br>
-                {if ($noticia->promedioscore)!=null}
-                    Valoración: <progress max="5" value="{$noticia->promedioscore}"></progress>
-                {else}
-                    0 comentarios
-                {/if}
-                <br>
-                <small><a href="{$base_url}details/{$noticia->id_news}"> Detalles </a></small>
-                <br>
-                {if $is_admin == 1}
-                    <small><a href="{$base_url}update/{$noticia->id_news}"> Cambiar </a></small>
-                    <br>
-                    <small><a href="{$base_url}delete/{$noticia->id_news}"> Delete </a></small>
-                    <br>
-                {/if}
-            </li>
-        {/foreach}
-    </ul>
-</div>
+        {if $news!=null}
+            <span>asd</span>
 
-{include 'templates/paginador.tpl'}
+            {foreach from=$news item=noticia}
+                <li>
+                    <h3>Titulo: {$noticia->title}</h3>
+                    Autor: {$noticia->author}
+                    <br>
+                    Categoria: {$noticia->name_category}
+                    <br>
+                    {if ($noticia->promedioscore)!=null}
+                        Valoración: <progress max="5" value="{$noticia->promedioscore}"></progress>
+                    {else}
+                        0 comentarios
+                    {/if}
+                    <br>
+                    <small><a href="{$base_url}details/{$noticia->id_news}"> Detalles </a></small>
+                    <br>
+                    {if $is_admin == 1}
+                        <small><a href="{$base_url}update/{$noticia->id_news}"> Cambiar </a></small>
+                        <br>
+                        <small><a href="{$base_url}delete/{$noticia->id_news}"> Delete </a></small>
+                        <br>
+                    {/if}
+                </li>
+            {/foreach}
+        </ul>
+    </div>
 
+    {include 'templates/paginador.tpl'}
+{else}
+    <a>No hay articulos!</a>
+{/if}
 {include 'templates/footer.tpl'}

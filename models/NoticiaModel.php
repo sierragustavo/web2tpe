@@ -86,17 +86,17 @@ class NoticiaModel extends DBModel
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    function updateNewsConImagen($id_news, $title, $details, $categoryID, $author, $destino)
+    function updateNewsConImagen($id_news, $title, $details, $categoryID, $destino)
     {
-        $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, author = ?, category_pk = ?, image = ? WHERE id_news = ?');
-        $query->execute([$title, $details, $author, $categoryID,  $destino, $id_news]);
+        $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, category_pk = ?, image = ? WHERE id_news = ?');
+        $query->execute([$title, $details, $categoryID,  $destino, $id_news]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
     function updateNews($id_news, $title, $details, $categoryID, $author)
     {
-        $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, category_pk = ?, author = ? WHERE id_news = ?');
-        $query->execute([$title, $details, $categoryID, $author, $id_news]);
+        $query = $this->getDb()->prepare('UPDATE news SET title = ?, details = ?, category_pk = ? WHERE id_news = ?');
+        $query->execute([$title, $details, $categoryID, $id_news]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
 }
