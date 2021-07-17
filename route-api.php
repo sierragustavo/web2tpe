@@ -11,7 +11,6 @@ $router->addRoute('news', 'GET', 'NewsApiController', 'getNews');
 $router->addRoute('news/:ID', 'GET', 'NewsApiController', 'getNewsById');
 $router->addRoute('addnews', 'POST', 'NewsApiController', 'addNews');
 $router->addRoute('categories', 'GET', 'NewsApiController', 'getCategories');
-$router->addRoute('uploadimage', 'POST', 'NewsApiController', 'uploadImage');
 
 $router->addRoute('comments/:ID', 'GET', 'CommentsApiController', 'getCommentsByNewsID');
 $router->addRoute('comments', 'GET', 'CommentsApiController', 'getAllComments');
