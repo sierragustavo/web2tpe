@@ -12,9 +12,9 @@
 
 <body>
     {if $is_admin == 1}
-        <input id='admin' value=1 type="hidden">
+        <input hidden id='admin' value=1 >
     {else}
-        <input id='admin' value=0 type="hidden">
+        <input hidden id='admin' value=0>
     {/if}
     
     {include 'templates/nav.tpl'}

@@ -33,7 +33,15 @@ class NoticiaController
             $paginaActual = $_GET['pagina'];
         else
             $paginaActual = 1;
-        if (isset($_GET['categoria'])) {
+        if (isset($_GET['categoria']))
+            $categoryFilter = $_GET['categoria'];
+        else
+            $categoryFilter = 'all';
+        if (($categoryFilter == 'all') && ($authorFilter == '')) {
+            $news = $this->modelNoticia->getAll();
+            $filtrando = false;
+            $id_category = 0; //para que funcione
+        } else {
             $id_category = $_GET['categoria'];
             if ($authorFilter == '')
                 $news = $this->modelNoticia->getNewsByCategory($id_category);
@@ -42,10 +50,6 @@ class NoticiaController
             elseif (($authorFilter != '') && ($id_category == 'all'))
                 $news = $this->modelNoticia->getNewsByAuthor($authorFilter);
             $filtrando = true;
-        } else {
-            $news = $this->modelNoticia->getAll();
-            $filtrando = false;
-            $id_category = 0; //para que funcione
         }
         $newsAlt = $news;
         $news = array_splice($newsAlt, ($paginaActual - 1) * LIMITE_PAGINADOR, LIMITE_PAGINADOR);
@@ -61,22 +65,24 @@ class NoticiaController
 
     public function addNews() //FORM ADD NOTICIA
     {
-        AuthHelper::checkLoggedIn();
-        $title = $_POST['title'];
-        $details = $_POST['details'];
-        $categoryID = $_POST['category'];
-        $author = AuthHelper::getLoggedUserName();
-        if (isset($_FILES['imagen']) && ($_FILES['imagen']['size'] > 1) && AuthHelper::getUserStatus()) {
-            $nameImage = $_FILES['imagen']['name'];
-            $tempImagePath = $_FILES['imagen']['tmp_name'];
-            $ext = pathinfo($nameImage, PATHINFO_EXTENSION);
-            $hashed = md5(time() . $nameImage) . '.' . $ext;
-            $path = 'img/';
-            $destino = $path . $hashed;
-            move_uploaded_file($tempImagePath, $destino);
-        } else
-            $destino = '';
-        $this->modelNoticia->new($title, $details, $categoryID, $author, $destino);
+        if ((!empty($_POST['title'])) && (!empty($_POST['details']))) {
+            AuthHelper::checkLoggedIn();
+            $title = $_POST['title'];
+            $details = $_POST['details'];
+            $categoryID = $_POST['category'];
+            $author = AuthHelper::getLoggedUserName();
+            if (isset($_FILES['imagen']) && ($_FILES['imagen']['size'] > 1) && AuthHelper::getUserStatus()) {
+                $nameImage = $_FILES['imagen']['name'];
+                $tempImagePath = $_FILES['imagen']['tmp_name'];
+                $ext = pathinfo($nameImage, PATHINFO_EXTENSION);
+                $hashed = md5(time() . $nameImage) . '.' . $ext;
+                $path = 'img/';
+                $destino = $path . $hashed;
+                move_uploaded_file($tempImagePath, $destino);
+            } else
+                $destino = '';
+            $this->modelNoticia->new($title, $details, $categoryID, $author, $destino);
+        }
         header("Location:" . BASE_URL . 'home');
     }
 

@@ -2,7 +2,7 @@
 
 <div class="news-details-box">
     <h2>{$new->title}</h2>
-    <a>{$new->details}</a>
+    <a class="details-text">{$new->details}</a>
     <h3>Autor: {$new->author}</h3>
     <h3>Categoria: {$new->name_category}</h3>
     {if ($new->image)}
@@ -48,7 +48,7 @@
 </div>
 <br>
 
-{if ($new->author)==$username}
+{if ($new->author)==$username || ($is_admin==1)}
     <div class="buttons-update-delete">
         <button><a href="{$base_url}update/{$new->id_news}"> Cambiar </a></button>
         <br>
@@ -56,7 +56,7 @@
     </div>
 {/if}
 <br>
-<small><a href="#"> Volver </a></small>
+<button type="button" onclick="history.back();">Volver</button>
 </div>
 <script src="{$base_url}js/api-vue.js"></script>
 {include 'templates/footer.tpl'}
